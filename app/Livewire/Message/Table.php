@@ -6,6 +6,13 @@ use Livewire\Component;
 
 class Table extends Component
 {
+    public $createBox = false;
+
+    public function closeMessageBox()
+    {
+        $this->createBox = false;
+    }
+
     public function render()
     {
 

@@ -6,18 +6,11 @@ use Livewire\Component;
 
 class Create extends Component
 {
-
-
-    public $modalCreate = false;
-
+    public $message;
     public function create() {
-        $this->modalCreate = true;
-
+        dump($this->message);
     }
 
-    public function story() {
-        
-    }
     public function render()
     {
         return view('livewire.message.create');

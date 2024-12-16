@@ -25,5 +25,6 @@ Route::middleware([
     Route::get('escola', Escola\Index::class)->name('escola.index');
 
     Route::get('message', Message\Index::class)->name('message.index');
+    Route::post('message/create', Message\Create::class)->name('message.create');
 
 });
