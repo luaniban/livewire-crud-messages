@@ -1,24 +1,36 @@
 <div>
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
-            <h2 class="text-xl mb-4">Criar Nova Mensagem</h2>
-            <div class="flex items-center mb-4  space-x-2">
-                <x-ts-select.styled wire:model.live="cargo" wire:change="cargoState" label="Cargo" select="label:label|value:value" :options="[
-                    ['label' => 'Todos', 'value' => 'todos'],
-                    ['label' => 'Professor', 'value' => '2'],
-                    ['label' => 'Gestor', 'value' => '3'],
-                ]" />
-                <x-ts-select.styled wire:model.prevent="destinatario" label="Destinatário" select="label:label|value:value" :options="$destinatarios" multiple/>
+    @if($modalCreate)
 
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20"
+        wire:click.self="closeModalCreate">
+
+        <div class="bg-white rounded-md shadow-md "
+         >
+            <div class="p-8">
+                <h1 class="mb-8 text-2xl">Criar mensagem</h1>
+                <div class="flex gap-4">
+                <x-ts-select.styled placeholder="Selecione.." label="Destinatário *" wire:model="cargo"
+
+                select="label:label|value:value"
+                :options="[
+                    ['label' => 'Professor', 'value' => 'Professor'],
+                    ['label' => 'Gestor', 'value' => 'Gestor'],
+                ]"/>
+
+                <x-ts-textarea class="w-96" resize label="Mensagem *" hint="Insira a mensagem" wire:model="descricao"/>
+                </div>
             </div>
+            <div class="flex justify-end gap-4 py-4 bg-gray-200 rounded-b-md">
+                <x-ts-button  color="white" wire:click='closeModal' class="hover:bg-black-50">Cancelar</x-ts-button>
 
-            <x-ts-textarea wire:model="message" placeholder="Digite sua mensagem" label="Mensagem"></x-ts-textarea>
-
-            <div class="mt-4 flex justify-end">
-                <button wire:click="create" class="bg-blue-500 text-white px-4 py-2 rounded">Enviar</button>
-
-                <button wire:click="$parent.closeMessageBox" class="bg-gray-500 text-white px-4 py-2 rounded ml-2">Fechar</button>
+                <x-button  class="mr-8 "
+                wire:click='store()'>
+                Salvar
+                </x-button>
             </div>
         </div>
+
+
     </div>
+    @endif
 </div>

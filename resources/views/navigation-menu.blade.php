@@ -12,22 +12,22 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @can('user_access')
+
                         <x-nav-link href="{{ route('dashboard') }}" wire:navigate :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
+                        @can('admin_access')
                         <x-nav-link href="{{ route('escola.index') }}" wire:navigate :active="request()->routeIs('escola.index')">
                             {{ __('Escola') }}
                         </x-nav-link>
-                        @if('admin_acess')
+                       
                         <x-nav-link href="{{ route('message.index') }}" wire:navigate :active="request()->routeIs('message.index')">
                             {{ __('Message') }}
                         </x-nav-link>
-                        @endif
+                        @endcan
 
 
-                    @endcan
-                   
+
 
                 </div>
             </div>

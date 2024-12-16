@@ -22,9 +22,10 @@ Route::middleware([
     Route::get('users-acrtivity', User\ActivityIndex::class)->name('users.activity.index');
 
     Route::get('user', User\Index::class)->name('user.index');
-    Route::get('escola', Escola\Index::class)->name('escola.index');
 
-    Route::get('message', Message\Index::class)->name('message.index');
-    Route::post('message/create', Message\Create::class)->name('message.create');
+    Route::get('escola', Escola\Index::class)->name('escola.index')->can('admin_access');
+
+    Route::get('message', Message\Index::class)->name('message.index')->can('admin_access');
+
 
 });
