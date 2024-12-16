@@ -39,7 +39,6 @@ class Edit extends Component
 
     public function update() {
         $this->validate([ //Para o admin colocar os dados corretamente, caso esteja errado, irá aparecer uma mensagem dizendo que o campo de dados está errado e está sendo requerido novamente.
-
             'cargo' => 'required|in:Professor,Gestor',
             'descricao' => 'required|string|max:100'
         ]);
