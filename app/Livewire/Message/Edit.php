@@ -46,7 +46,6 @@ class Edit extends Component
         $user = Message::find($this->user_id);
 
         $user->update([
-
             'cargo' => $this->cargo,
             'descricao' => $this->descricao,
         ]);

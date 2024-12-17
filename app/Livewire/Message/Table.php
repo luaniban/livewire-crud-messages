@@ -6,6 +6,8 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Table extends Component
+
+
 {
 
     public $createBox = false;
