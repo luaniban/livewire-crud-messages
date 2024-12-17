@@ -28,7 +28,6 @@ class Edit extends Component
         $user = Message::find($id);
 
         $this->user_id = $user->id;
-
         $this->cargo = $user->cargo;
         $this->descricao = $user->descricao;
 

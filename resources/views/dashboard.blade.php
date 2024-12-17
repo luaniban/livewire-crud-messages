@@ -12,7 +12,7 @@
 
                            
                             <a href="https://storyset.com/education" class="block mt-4 text-xs text-center text-gray-400">
-                                Education illustrations by Storyset
+                                Education illustrations by Storyset 
                             </a>
                         </div>
                     </div>
