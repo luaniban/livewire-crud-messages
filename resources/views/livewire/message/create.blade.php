@@ -47,7 +47,7 @@
                             <div>
                                 <!-- Componente de upload com Livewire -->
                                 <x-ts-upload wire:model="file" label="Upload" hint="Arquivo ou imagem de até 2MB">
-                                   
+
                                 </x-ts-upload>
 
                             </div>

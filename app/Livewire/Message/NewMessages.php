@@ -34,7 +34,7 @@ class NewMessages extends Component
 
 
         if($this->messages) {
-            $this->toast()->success('Voce tem uma nova mensagem!')->send();
+            //$this->toast()->success('Voce tem uma nova mensagem!')->send();
         }
         return view('livewire.message.new-messages');
     }

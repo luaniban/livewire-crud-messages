@@ -4,6 +4,7 @@ use App\Livewire\Cargo;
 use App\Livewire\Escola;
 use App\Livewire\User;
 use App\Livewire\Message;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,6 +27,9 @@ Route::middleware([
     Route::get('escola', Escola\Index::class)->name('escola.index')->can('admin_access');
 
     Route::get('message', Message\Index::class)->name('message.index')->can('admin_access');
+
+
+    Route::get('newMessages', Message\NewMessages::class)->name('newMessages.index');
 
 
 });

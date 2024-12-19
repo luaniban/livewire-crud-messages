@@ -1,33 +1,51 @@
 <?php
 
 namespace App\Livewire\Message;
+
 use App\Models\Message;
-use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Table extends Component
-
-
 {
+    use WithPagination; // Para usar a paginação
+    //public $users;
+    public $searchUsuarioTrueOrFalse = false;
+    public $search ="";
+    public $destinatarioSearch = null;
+    protected $queryString = ['destinatarioSearch']; // Mantém o valor na URL
 
-    //public $search = '';
-    public $pUserPerPage = 5;
-    //public $destinatarioSearch = "";
+    // Função de submit para filtrar os resultados
+    public function submit()
+    {
+        //dd($this->destinatarioSearch) ;
+        $results = [];
+        $usersQuery = Message::query();
+
+        if ($this->destinatarioSearch && $this->destinatarioSearch !== 'usuario') {
+            $usersQuery->where('destinatario', $this->destinatarioSearch);
+        }
+        if($this->destinatarioSearch == 'usuario') {
+            $this->searchUsuarioTrueOrFalse = true;
+
+            if(strlen($this->search) >= 1) {
+                $results = Message::where('name', 'like', '%' . $this->search . '%')->limit(5)->get();}
+              
+        }
+        else {
+            $this->searchUsuarioTrueOrFalse = false;
+        }
+
+        $users = $usersQuery->orderBy('id', 'desc')->paginate(10);
 
 
-    public function destinatarioSearch() {
-        dd($this->destinatarioSearch);
+        return view('livewire.message.table',['users' => $users, 'usersSearch' => $results]);
     }
-    
-    #[On('dispatch-delete-concluida')]
-    #[On('dispatch-edit-concluida')]
-    #[On('dispatch-message-table-create-criado')]
+
+    // Função render para exibir a tabela de dados
     public function render()
     {
-        $results = [];
-
-
-        $users = Message::all();
-        return view('livewire.message.table', ['users' => Message::orderBy('id', 'desc')->paginate($this->pUserPerPage)]);
+        // Chama a função submit para carregar os dados filtrados ou não
+        return $this->submit();
     }
 }

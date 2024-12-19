@@ -10,9 +10,9 @@
                             </h1>
                             <img src="/storage/image/logo.svg" id="imagemSelecionada" alt="Logo" class="h-auto max-w-full max-h-full">
 
-                           
+
                             <a href="https://storyset.com/education" class="block mt-4 text-xs text-center text-gray-400">
-                                Education illustrations by Storyset 
+                                Education illustrations by Storyset
                             </a>
                         </div>
                     </div>
@@ -20,5 +20,5 @@
             </div>
         </div>
     </div>
-    <livewire:message.newMessages>
+    
 </x-app-layout>
