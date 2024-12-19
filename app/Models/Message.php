@@ -8,7 +8,11 @@ class Message extends Model
 {
     protected $fillable = [
         'name',
-        'cargo',
+        'destinatario',
         'descricao',
+        'file',
+        'dataAt',
+        'status',
+        'titulo',
     ];
 }

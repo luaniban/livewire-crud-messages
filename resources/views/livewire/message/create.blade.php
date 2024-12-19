@@ -6,27 +6,71 @@
 
         <div class="bg-white rounded-md shadow-md "
          >
-            <div class="p-8">
-                <h1 class="mb-8 text-2xl">Criar mensagem</h1>
-                <div class="flex gap-4">
-                <x-ts-select.styled placeholder="Selecione.." label="Destinatário *" wire:model="cargo"
+            <div class="gap-8 p-8">
+                 <div class="flex w-full gap-4">
+                    <h1 class="mb-6 text-3xl">Criar mensagem</h1>
+                    <div class="mt-3">
+                        <x-ts-toggle label="Inativo/Ativo" wire:model='status' class=""/>
+                    </div>
+                </div>
+            <div class="flex">
+                <div class="w-56 ">
+                    <x-ts-select.styled placeholder="Selecione.." label="Destinatário *" wire:model="destinatario" class=""
 
-                select="label:label|value:value"
-                :options="[
-                    ['label' => 'Professor', 'value' => 'Professor'],
-                    ['label' => 'Gestor', 'value' => 'Gestor'],
-                ]"/>
+                    select="label:label|value:value"
+                    :options="[
+                        ['label' => 'Todos', 'value' => 'todos'],
+                        ['label' => 'Professor', 'value' => 'professor'],
+                        ['label' => 'Gestor', 'value' => 'gestor'],
+                        ['label' => 'Pais de Alunos', 'value' => 'pais de alunos'],
+                        ['label' => 'Pesquisar Usuário', 'value' => 'usuario'],
+                    ]"/>
 
-                <x-ts-textarea class="w-96" resize label="Mensagem *" hint="Insira a mensagem" wire:model="descricao"/>
+                </div>
+
+
+                @if($searchUser)
+                   <x-ts-input wire:model='name'></x-ts-input>
+                @endif
+
+
+                <div class="w-64 ml-8">
+                    <x-ts-input  label="Titulo *" wire:model="titulo" hint="Insira o titulo"></x-ts-input>
+
+
+                    <div class="mt-4">
+                        <x-ts-textarea resize label="Descrição *" hint="Insira a descrição" wire:model="descricao"/>
+                    </div>
+
+                    <div class="mt-4">
+                        <form wire:submit.prevent="submit" enctype="multipart/form-data">
+                            <div>
+                                <!-- Componente de upload com Livewire -->
+                                <x-ts-upload wire:model="file" label="Upload" hint="Arquivo ou imagem de até 2MB">
+                                   
+                                </x-ts-upload>
+
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="mt-4">
+                        <x-ts-date label="Data *" hint="Data de envio da mensagem" wire:model='dataAt'/>
+                    </div>
                 </div>
             </div>
+        </div>
+
             <div class="flex justify-end gap-4 py-4 bg-gray-200 rounded-b-md">
-                <x-ts-button  color="white" wire:click='closeModal' class="hover:bg-black-50">Cancelar</x-ts-button>
+                <x-ts-button  color="white" wire:click='closeModalCreate' class="hover:bg-black-50">Cancelar</x-ts-button>
 
                 <x-button  class="mr-8 "
                 wire:click='store()'>
                 Salvar
                 </x-button>
+
+
             </div>
         </div>
 
