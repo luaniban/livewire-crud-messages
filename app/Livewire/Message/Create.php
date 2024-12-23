@@ -77,6 +77,9 @@ class Create extends Component
         if ($this->status == "") {
             $this->status = 0;
         }
+        else {
+            $this->status = 1;
+        }
 
         if ($this->destinatario == "usuario") {
             $this->validate([
@@ -118,6 +121,7 @@ class Create extends Component
             ]);
         }
 
+        //dd($this->status);
 
 
         $this->closeModalCreate();

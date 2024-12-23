@@ -6,14 +6,15 @@ use App\Models\Message;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 use Illuminate\Testing\Fluent\Concerns\Interaction;
-
+use Carbon\Carbon;
 
 class NewMessages extends Component
 {
     use Interactions;
 
-    public $messages, $mensagem;
+    public $messages, $mensagem, $dataAtual;
     public $modalShow = false;
+
 
 
     public function openModalShow() {
@@ -32,6 +33,9 @@ class NewMessages extends Component
         $this->messages = Message::all();
         //dd($messages);
 
+        $this->dataAtual = Carbon::now();
+
+        
 
         if($this->messages) {
             //$this->toast()->success('Voce tem uma nova mensagem!')->send();

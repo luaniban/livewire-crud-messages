@@ -22,9 +22,9 @@
 
                         <x-nav-link href="{{ route('message.index') }}" wire:navigate :active="request()->routeIs('message.index')">
                             {{ __('Message') }}
+
                         </x-nav-link>
                         @endcan
-
 
 
 
@@ -63,6 +63,7 @@
                                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                         <x-dropdown-link href="{{ route('teams.create') }}">
                                             {{ __('Create New Team') }}
+
                                         </x-dropdown-link>
                                     @endcan
 
@@ -87,10 +88,7 @@
                 <!-- Settings Dropdown -->
                 <div class="relative ms-3">
                     <div class="flex">
-                        <x-responsive-nav-link href="{{ route('newMessages.index') }}" wire:navigate :active="request()->routeIs('newMessages.index')">
-                            
-                            <p class="text-sm">{{'Mensagens'}}</p>
-                         </x-responsive-nav-link>
+                       
 
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

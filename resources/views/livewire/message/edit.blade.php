@@ -11,7 +11,11 @@
                  <div class="flex w-full gap-4">
                     <h1 class="mb-6 text-3xl">Editar mensagem</h1>
                     <div class="mt-3">
-                        <x-ts-toggle label="Inativo/Ativo" wire:model='status' class=""/>
+
+
+                    <x-ts-toggle label="Inativo/Ativo" wire:model='status' class=""/>
+
+
                     </div>
                 </div>
             <div class="flex">

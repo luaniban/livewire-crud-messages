@@ -37,7 +37,7 @@ class Edit extends Component
 
         }
 
-        else {
+
             $this->user_id = $user->id;
             $this->destinatario = $user->destinatario;
             $this->descricao = $user->descricao;
@@ -45,7 +45,7 @@ class Edit extends Component
             $this->dataAt = $user->dataAt;
             $this->status = $user->status;
             $this->titulo = $user->titulo;
-        }
+
         $this->modalEdit = true;
 
     }
@@ -54,7 +54,9 @@ class Edit extends Component
     public function update() {
         $this->validate([ //Para o admin colocar os dados corretamente, caso esteja errado, irá aparecer uma mensagem dizendo que o campo de dados está errado e está sendo requerido novamente.
             'destinatario' => 'required',
-            'descricao' => 'required|string|max:1000'
+            'descricao' => 'required|string|max:1000',
+            'dataAt' => 'required',
+            'titulo' => 'required',
         ]);
 
         $user = Message::find($this->user_id);
@@ -62,6 +64,10 @@ class Edit extends Component
         $user->update([
             'destinatario' => $this->destinatario,
             'descricao' => $this->descricao,
+            'titulo' => $this->titulo,
+            'dataAt' => $this->dataAt,
+            'status' => $this->status
+
         ]);
 
 

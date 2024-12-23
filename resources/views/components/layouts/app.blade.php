@@ -27,6 +27,9 @@
     </head>
     <body class="font-sans antialiased">
 
+        <div><livewire:message.count-notifications /></div>
+
+
         <x-ts-banner />
 
         <x-ts-toast />
@@ -36,6 +39,7 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
+
             </main>
         </div>
 

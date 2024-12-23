@@ -43,11 +43,7 @@ class Table extends Component
         }
 
 
-        $countTodos = Message::where('destinatario', 'todos')->count();
-        $countProfessor = Message::where('destinatario', 'professor')->count();
-        $countGestor = Message::where('destinatario', 'gestor')->count();
-        $countPaisDeAlunos = Message::where('destinatario', 'pais de alunos')->count();
-        $countUsuario = Message::where('destinatario', 'usuario')->count();
+        
 
 
 

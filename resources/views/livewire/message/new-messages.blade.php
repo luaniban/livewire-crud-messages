@@ -24,6 +24,10 @@
                 </tr>
                 <tbody>
                     @foreach ($messages as $message)
+                   
+                    @if($message->dataAt >= $dataAtual)
+
+
                     <tr>
                         @if($message->destinatario == "professor" || $message->destinatario == "gestor" )
                             @can( 'diretor_access')
@@ -70,7 +74,7 @@
 
 
 
-
+                    @endif
                     @endforeach
 
 
@@ -79,7 +83,7 @@
 
 
             <livewire:message.vizualizar/>
-          
+
         </div>
 
 

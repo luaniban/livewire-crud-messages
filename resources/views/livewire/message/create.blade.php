@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <x-ts-date label="Data *" hint="Data de envio da mensagem" wire:model='dataAt'/>
+                        <x-ts-date label="Data de envio da mensagem *" hint="Data de envio da mensagem" wire:model='dataAt'/>
                     </div>
                 </div>
             </div>
@@ -83,5 +83,5 @@
     @endif
 
 
-   
+
 </div>

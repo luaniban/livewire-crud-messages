@@ -4,25 +4,25 @@
     <table class="flex-col items-center hidden min-w-full divide-y divide-gray-200 md:table">
 
         <div class="flex items-center gap-4 mb-4">
-            <x-ts-button icon="folder-plus" color="emerald" class="mt-5" outline @click="$dispatch('dispatch-message-table-create')">
+            <x-ts-button icon="folder-plus" color="emerald" class="mt-5 mb-4" outline @click="$dispatch('dispatch-message-table-create')">
                 Criar mensagem
             </x-ts-button>
 
-        <form >
-            <div class="flex gap-2 mt-0">
 
-               
-                <x-ts-select.native  class="" placeholder="Filtrar..." label="Destinátario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
-            ['label' => 'Todos', 'value' => 'todos'],
-            ['label' => 'Professor', 'value' => 'professor'],
-            ['label' => 'Gestor', 'value' => 'gestor'],
-            ['label' => 'Pais de Alunos', 'value' => 'pais de alunos'],
-            ['label' => 'Pesquisar Usuário', 'value' => 'usuario'],
+        <div class="flex items-center ">
 
-        ]" />
-            <x-ts-button icon="adjustments-vertical" wire:click="submit()" color="emerald" class="h-8 mt-6">Filtrar</x-ts-button>
-        </form>
 
+            <x-ts-select.styled class="" placeholder="Filtrar por Destinatario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
+                ['label' => 'Todos', 'value' => 'todos'],
+                ['label' => 'Professor', 'value' => 'professor'],
+                ['label' => 'Gestor', 'value' => 'gestor'],
+                ['label' => 'Pais de Alunos', 'value' => 'pais de alunos'],
+                ['label' => 'Pesquisar Usuário', 'value' => 'usuario'],
+
+            ]" />
+            <x-ts-button  icon="adjustments-vertical" wire:click="submit()" color="emerald" class="h-8 ml-4">Filtrar</x-ts-button>
+
+        </div>
         @if($searchUsuarioTrueOrFalse)
 
 
@@ -36,7 +36,7 @@
                     @foreach($usersSearch as $userSearch)
 
                     <div class="bg-gray-200 w-62 ml-7">
-                        <button  class="w-full text-center bg-gray-100" wire:model="destinatarioSearch">{{ $userSearch->name }}
+                        <button  class="w-full text-center bg-gray-100 " wire:model="destinatarioSearch">{{ $userSearch->name }}
                         </button>
 
                     </div>
@@ -47,7 +47,7 @@
             </div>
         @endif
         <tr>
-            <thead>
+            <thead class="bg-gray-50">
                 <x-table-th>
                     ID
                 </x-table-th>
@@ -72,9 +72,9 @@
                 </x-table-th>
             </thead>
         </tr>
-        <tbody>
+        <tbody class="bg-white divide-y divide-gray-200">
             @foreach ($users as $user)
-            <tr>
+            <tr class="hover:bg-gray-50">
                 <x-table-td>{{ $user->id }}</x-table-td>
                 <x-table-td>{{ $user->destinatario }}</x-table-td>
                 <x-table-td>{{ $user->name }}</x-table-td>
