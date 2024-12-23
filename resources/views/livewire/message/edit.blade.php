@@ -9,7 +9,7 @@
          >
             <div class="gap-8 p-8">
                  <div class="flex w-full gap-4">
-                    <h1 class="mb-6 text-3xl">Criar mensagem</h1>
+                    <h1 class="mb-6 text-3xl">Editar mensagem</h1>
                     <div class="mt-3">
                         <x-ts-toggle label="Inativo/Ativo" wire:model='status' class=""/>
                     </div>
@@ -37,15 +37,19 @@
 
 
                     <div class="mt-4">
-                        <x-ts-textarea resize label="Descrição *" hint="Insira a descrição" wire:model="descricao"/>
+                        <x-ts-textarea class="max-h-32" resize label="Descrição *" hint="Insira a descrição" wire:model="descricao"/>
                     </div>
 
-                    <div class="mt-4">
-                        <x-ts-upload wire:model="file" label="Upload" hint="Arquivo ou imagem de até 2MB">
-                            <x-slot:footer>
+                    <div>
 
+                        <x-ts-upload wire:model='file'>
+                            <x-slot:footer>
+                                <x-ts-button class="w-full">
+                                    Save
+                                </x-ts-button>
                             </x-slot:footer>
                         </x-ts-upload>
+
                     </div>
 
                     <div class="mt-4">

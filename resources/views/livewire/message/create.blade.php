@@ -43,15 +43,19 @@
                     </div>
 
                     <div class="mt-4">
-                        <form wire:submit.prevent="submit" enctype="multipart/form-data">
-                            <div>
-                                <!-- Componente de upload com Livewire -->
-                                <x-ts-upload wire:model="file" label="Upload" hint="Arquivo ou imagem de até 2MB">
 
+                            <div>
+
+                                <x-ts-upload wire:model='file'>
+                                    <x-slot:footer>
+                                        <x-ts-button class="w-full">
+                                            Save
+                                        </x-ts-button>
+                                    </x-slot:footer>
                                 </x-ts-upload>
 
                             </div>
-                        </form>
+
 
                     </div>
 
@@ -77,4 +81,7 @@
 
     </div>
     @endif
+
+
+   
 </div>

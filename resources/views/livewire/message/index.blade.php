@@ -8,8 +8,7 @@
             <livewire:message.edit/>
             <livewire:message.delete/>
             <livewire:message.create/>
-            <livewire:message.EnvioDaMensagem/>
-
+            
         </div>
     </div>
 </div>

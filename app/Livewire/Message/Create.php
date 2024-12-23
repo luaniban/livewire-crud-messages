@@ -23,21 +23,11 @@ class Create extends Component
 
     public $file;
     protected $rules = [
-        'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        'file' => 'required|file|max:2048|mimes:jpg,jpeg,png,gif,pdf',
     ];
 
-    public function submit()
-    {
-
-        $this->validate();
-
-        // Salvando o arquivo
-        $this->path = $this->file->store(Message::class);
 
 
-
-        session()->flash('message', 'Arquivo carregado com sucesso!');
-    }
 
     public $modalCreate = false;
 
@@ -99,20 +89,34 @@ class Create extends Component
         }
 
 
+        if($this->file != null) {
+            $path = $this->file->store('uploads', 'public');
 
+            Message::create([
 
-        Message::create([
+                'destinatario' => $this->destinatario,
+                'descricao' => $this->descricao,
+                'name' => $this->name,
+                'file' => $path,
+                'dataAt' => $this->dataAt,
+                'status' => $this->status,
+                'titulo' => $this->titulo,
 
-            'destinatario' => $this->destinatario,
-            'descricao' => $this->descricao,
-            'name' => $this->name,
-            'file' => $this->file,
-            'dataAt' => $this->dataAt,
-            'status' => $this->status,
-            'titulo' => $this->titulo,
+            ]);
+        }
 
-        ]);
+        else {
+            Message::create([
 
+                'destinatario' => $this->destinatario,
+                'descricao' => $this->descricao,
+                'name' => $this->name,
+                'dataAt' => $this->dataAt,
+                'status' => $this->status,
+                'titulo' => $this->titulo,
+
+            ]);
+        }
 
 
 

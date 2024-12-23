@@ -10,7 +10,9 @@
 
         <form >
             <div class="flex gap-2 mt-0">
-                <x-ts-select.styled  class="" placeholder="Filtrar..." label="Destinátario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
+
+               
+                <x-ts-select.native  class="" placeholder="Filtrar..." label="Destinátario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
             ['label' => 'Todos', 'value' => 'todos'],
             ['label' => 'Professor', 'value' => 'professor'],
             ['label' => 'Gestor', 'value' => 'gestor'],
@@ -58,7 +60,7 @@
                 <x-table-th>
                    Titulo
                 </x-table-th>
-             
+
                 <x-table-th>
                     status
                 </x-table-th>
@@ -95,5 +97,6 @@
     <div class="mt-4">
         {{ $users->links() }}
     </div>
+
 
 </div>

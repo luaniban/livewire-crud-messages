@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire\Message;
-
+use Livewire\Attributes\On;
 use App\Models\Message;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,12 +10,18 @@ class Table extends Component
 {
     use WithPagination; // Para usar a paginação
     //public $users;
+    public $count;
     public $searchUsuarioTrueOrFalse = false;
     public $search ="";
     public $destinatarioSearch = null;
     protected $queryString = ['destinatarioSearch']; // Mantém o valor na URL
 
     // Função de submit para filtrar os resultados
+
+    #[On('dispatch-delete-concluida')]
+    #[On('dispatch-edit-concluida')]
+    #[On('dispatch-message-table-create-criado')]
+    //#[On('dispatch-notification-count,{}')]
     public function submit()
     {
         //dd($this->destinatarioSearch) ;
@@ -30,11 +36,20 @@ class Table extends Component
 
             if(strlen($this->search) >= 1) {
                 $results = Message::where('name', 'like', '%' . $this->search . '%')->limit(5)->get();}
-              
+
         }
         else {
             $this->searchUsuarioTrueOrFalse = false;
         }
+
+
+        $countTodos = Message::where('destinatario', 'todos')->count();
+        $countProfessor = Message::where('destinatario', 'professor')->count();
+        $countGestor = Message::where('destinatario', 'gestor')->count();
+        $countPaisDeAlunos = Message::where('destinatario', 'pais de alunos')->count();
+        $countUsuario = Message::where('destinatario', 'usuario')->count();
+
+
 
         $users = $usersQuery->orderBy('id', 'desc')->paginate(10);
 

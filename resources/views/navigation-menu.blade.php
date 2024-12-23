@@ -88,7 +88,8 @@
                 <div class="relative ms-3">
                     <div class="flex">
                         <x-responsive-nav-link href="{{ route('newMessages.index') }}" wire:navigate :active="request()->routeIs('newMessages.index')">
-                            {{'notifications'}}
+                            
+                            <p class="text-sm">{{'Mensagens'}}</p>
                          </x-responsive-nav-link>
 
                     <x-dropdown align="right" width="48">
@@ -98,7 +99,7 @@
                                     <button class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
                                         <img class="object-cover w-8 h-8 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                     </button>
-                            
+
                             @else
                         </div>
                                 <span class="inline-flex rounded-md">

@@ -25,29 +25,61 @@
                 <tbody>
                     @foreach ($messages as $message)
                     <tr>
-                        @if($message->destinatario == "professor")
+                        @if($message->destinatario == "professor" || $message->destinatario == "gestor" )
                             @can( 'diretor_access')
                                 <x-table-td>{{ $message->id }}</x-table-td>
                                 <x-table-td>{{ $message->destinatario }}</x-table-td>
 
                                 <x-table-td>{{ $message->titulo }}</x-table-td>
                                 <x-table-td>
+                                    <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
+                                </x-table-td>
+                            </tr>
+                            @endcan
+
+
+                        @endif
+
+                        @if($message->destinatario == "pais de alunos")
+                            @can('user_access')
+                                    <x-table-td>{{ $message->id }}</x-table-td>
+                                    <x-table-td>{{ $message->destinatario }}</x-table-td>
+
+                                    <x-table-td>{{ $message->titulo }}</x-table-td>
+
+                                    <x-table-td>
+                                        <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
+                                    </x-table-td>
+                                </tr>
                             @endcan
                         @endif
-                        
+                        @if($message->destinatario == "todos")
+
+                                    <x-table-td>{{ $message->id }}</x-table-td>
+                                    <x-table-td>{{ $message->destinatario }}</x-table-td>
+
+                                    <x-table-td>{{ $message->titulo }}</x-table-td>
+
+                                    <x-table-td>
+                                        <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
+                                    </x-table-td>
+                                </tr>
+
+                        @endif
 
 
-                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
-                        </x-table-td>
-                    </tr>
+
+
 
                     @endforeach
+
 
                 </tbody>
             </table>
 
 
             <livewire:message.vizualizar/>
+          
         </div>
 
 
