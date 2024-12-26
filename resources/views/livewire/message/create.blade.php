@@ -1,37 +1,70 @@
 <div>
     @if($modalCreate)
 
-    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20"
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 "
         wire:click.self="closeModalCreate">
 
-        <div class="bg-white rounded-md shadow-md "
-         >
-            <div class="gap-8 p-8">
+        <div class="w-1/2 bg-white rounded-md shadow-md">
+
+            <div class="flex-col gap-16 p-8 pl-20">
                  <div class="flex w-full gap-4">
                     <h1 class="mb-6 text-3xl">Criar mensagem</h1>
                     <div class="mt-3">
                         <x-ts-toggle label="Inativo/Ativo" wire:model='status' class=""/>
                     </div>
                 </div>
+
+
+
             <div class="flex">
                 <div class="w-56 ">
-                    <x-ts-select.styled placeholder="Selecione.." label="Destinatário *" wire:model="destinatario" class=""
-
-                    select="label:label|value:value"
-                    :options="[
-                        ['label' => 'Todos', 'value' => 'todos'],
-                        ['label' => 'Professor', 'value' => 'professor'],
-                        ['label' => 'Gestor', 'value' => 'gestor'],
-                        ['label' => 'Pais de Alunos', 'value' => 'pais de alunos'],
-                        ['label' => 'Pesquisar Usuário', 'value' => 'usuario'],
-                    ]"/>
-
-                </div>
+                    <x-ts-select.native label="Destinatario *" wire:model='destinatario'>
+                        <option wire:click="closeSearchUser()" >Selecione...</option>
+                        <option wire:click="closeSearchUser()" >Todos</option>
+                        <option wire:click="closeSearchUser()" >Professor</option>
+                        <option wire:click="closeSearchUser()" >Gestor</option>
+                        <option wire:click="closeSearchUser()" >Pais de alunos</option>
+                        <option wire:click="pesquisarUsuario()">Pesquisar Usuario</option>
+                    </x-ts-select.native>
 
 
                 @if($searchUser)
-                   <x-ts-input wire:model='name'></x-ts-input>
+                    <div>
+
+                        <div class="flex items-center mt-8">
+                            <x-ts-icon name="magnifying-glass" outline class="w-5 h-5 mr-2"/>
+
+                            <x-ts-input icon="users" type="search" placeholder="Pesquisar..." aria-label="Search" wire:model.live="search" class="border-gray-300 rounded shadow-md "/>
+                        </div>
+
+
+
+                        <x-ts-select.native wire:model.live='name'>
+                            <option value="">Selecione...</option>
+                            @if(sizeof($pesquisarUsers) > 0)
+
+                                @foreach($pesquisarUsers as $pesquisarUser)
+
+                                <div class="bg-gray-200 w-62 ml-7">
+                                    <option  class="text-center bg-gray-100" >{{ $pesquisarUser->name }}
+                                    </option>
+
+                                </div>
+                                @endforeach
+
+                            @endif
+                        </x-ts-select.native>
+
+
+
+
+
+
+
+                    </div>
                 @endif
+           </div>
+
 
 
                 <div class="w-64 ml-8">
@@ -46,11 +79,9 @@
 
                             <div>
 
-                                <x-ts-upload wire:model='file'>
+                                <x-ts-upload wire:model='file' label="Anexar um arquivo">
                                     <x-slot:footer>
-                                        <x-ts-button class="w-full">
-                                            Save
-                                        </x-ts-button>
+
                                     </x-slot:footer>
                                 </x-ts-upload>
 

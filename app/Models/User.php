@@ -7,6 +7,7 @@ use App\Casts\UpperCase;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -88,6 +89,11 @@ class User extends Authenticatable
     public function cargo(): BelongsTo
     {
         return $this->belongsTo(Cargo::class);
+    }
+
+    public function messag00es(): HasMany
+    {
+        return $this->hasMany(Message::class);
     }
 
     public function scopePesquisa($query, $pesquisa)

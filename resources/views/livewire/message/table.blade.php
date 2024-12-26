@@ -11,8 +11,10 @@
 
         <div class="flex items-center ">
 
+     
 
-            <x-ts-select.styled class="" placeholder="Filtrar por Destinatario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
+
+            <x-ts-select.styled class="w-min-xl" placeholder="Filtrar por Destinatario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
                 ['label' => 'Todos', 'value' => 'todos'],
                 ['label' => 'Professor', 'value' => 'professor'],
                 ['label' => 'Gestor', 'value' => 'gestor'],
@@ -84,7 +86,7 @@
                 <x-table-td>{{ $user->dataAt}}</x-table-td>
                 <x-table-td>
                     <x-ts-button icon="pencil" color="gray"  outline @click="$dispatch('dispatch-message-table-edit', { id: '{{ $user->id}}' })"></x-ts-button>
-                    <livewire:vizu
+
                     <x-ts-button icon="x-mark" color="red" outline @click="$dispatch('dispatch-message-table-delete', { id: '{{ $user->id}}' })"></x-ts-button>
                 </x-table-td>
             </tr>
@@ -97,6 +99,7 @@
     <div class="mt-4">
         {{ $users->links() }}
     </div>
+
 
 
 </div>

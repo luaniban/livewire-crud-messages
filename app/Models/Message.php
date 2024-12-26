@@ -15,4 +15,9 @@ class Message extends Model
         'status',
         'titulo',
     ];
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

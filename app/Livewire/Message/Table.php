@@ -1,20 +1,22 @@
 <?php
 
 namespace App\Livewire\Message;
-use Livewire\Attributes\On;
+use App\Models\User;
 use App\Models\Message;
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
 class Table extends Component
 {
     use WithPagination; // Para usar a paginação
     //public $users;
-    public $count;
     public $searchUsuarioTrueOrFalse = false;
     public $search ="";
     public $destinatarioSearch = null;
     protected $queryString = ['destinatarioSearch']; // Mantém o valor na URL
+
+
 
     // Função de submit para filtrar os resultados
 
@@ -43,7 +45,8 @@ class Table extends Component
         }
 
 
-        
+
+
 
 
 

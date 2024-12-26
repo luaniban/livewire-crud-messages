@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Livewire\Message;
-use Livewire\Attributes\On;
+use App\Models\User;
 use App\Models\Message;
-use Illuminate\Testing\Fluent\Concerns\Interaction;
-use TallStackUi\Traits\Interactions;
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
+use TallStackUi\Traits\Interactions;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Finder\SplFileInfo;
-use Livewire\WithFileUploads;
-
-use Livewire\Component;
+use Illuminate\Testing\Fluent\Concerns\Interaction;
 
 class Create extends Component
 {
@@ -19,12 +19,16 @@ class Create extends Component
 
 
 
-    public $name,  $dataAt, $destinatario, $status, $titulo, $descricao, $password, $user, $searchUser, $path;
+    public $name,  $dataAt, $destinatario, $status, $titulo, $descricao, $password, $user, $path;
 
+    public $search = '';
+    public $pesquisarUsers = [];
+    public $searchUser = false;
     public $file;
     protected $rules = [
         'file' => 'required|file|max:2048|mimes:jpg,jpeg,png,gif,pdf',
     ];
+
 
 
 
@@ -54,22 +58,52 @@ class Create extends Component
     public function create(){
         $this->resetInputFields();
         $this->openModalCreate();
+
+
     }
 
+    public function closeSearchUser() {
+        $this->searchUser = false;
+    }
+
+    public function pesquisarUsuario(){
+
+        $this->searchUser = true;
+
+    }
+
+    public function updatedSearch()
+    {
+        if(strlen($this->search) >= 1) {
+            $this->pesquisarUsers = User::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
+        }
+
+    }
 
 
     public function store() {
 
 
         $this->validate([
-            'destinatario' => 'required',
+            'destinatario' => 'required|not_in:Selecione...',
             'descricao' => 'required',
-            //'name' => 'required', fazer a validação caso o destinatario seja "Pesquisar usuario"
+            //'name' => 'required',
             //'file' => 'required|nullable',
             'dataAt' => 'required',
             'titulo' => 'required',
 
         ]);
+
+        // dd($this->name);
+        if($this->destinatario == 'Pesquisar Usuario') {
+            $this->validate([
+                'name' => 'required|not_in:Selecione...',
+            ]);
+            $this->searchUser = false;
+        }
+
+
+
 
 
 
@@ -81,15 +115,7 @@ class Create extends Component
             $this->status = 1;
         }
 
-        if ($this->destinatario == "usuario") {
-            $this->validate([
-                'name' => 'required',
-            ]);
-            $this->searchUser = true;
-        }
-        else {
-            $this->searchUser = false;
-        }
+
 
 
         if($this->file != null) {
@@ -121,7 +147,8 @@ class Create extends Component
             ]);
         }
 
-        //dd($this->status);
+
+
 
 
         $this->closeModalCreate();
@@ -133,11 +160,14 @@ class Create extends Component
 
     }
 
+
+
+
     public function render()
     {
 
 
-
+        $pesquisarUsers = User::all();
 
 
 

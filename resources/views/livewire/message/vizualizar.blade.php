@@ -1,7 +1,7 @@
 <div>
     @if($modalVizu)
         <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20"  wire:click.self="closeModalVizu">
-            <div class="flex-col max-w-xl p-8 bg-white rounded">
+            <div class="flex-col max-w-5xl p-8 bg-white rounded">
 
                 <h1 class="p-2 mb-4 text-3xl bg-gray-100">{{ $titulo }}:</h1>
 

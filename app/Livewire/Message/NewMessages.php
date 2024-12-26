@@ -7,14 +7,17 @@ use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 use Illuminate\Testing\Fluent\Concerns\Interaction;
 use Carbon\Carbon;
+use Livewire\WithPagination;
 
 class NewMessages extends Component
 {
+
+    use WithPagination;
     use Interactions;
 
-    public $messages, $mensagem, $dataAtual;
+    public $mensagem, $dataAtual, $users;
     public $modalShow = false;
-
+    public $itemsPerPage = 10;
 
 
     public function openModalShow() {
@@ -30,16 +33,18 @@ class NewMessages extends Component
     public function render()
     {
 
-        $this->messages = Message::all();
-        //dd($messages);
 
-        $this->dataAtual = Carbon::now();
 
-        
+        $messages = Message::orderBy('id', 'desc')->where('status', 1)->paginate($this->itemsPerPage);
 
-        if($this->messages) {
-            //$this->toast()->success('Voce tem uma nova mensagem!')->send();
-        }
-        return view('livewire.message.new-messages');
+
+
+
+
+
+        //$this->users = $this->messages->orderBy('id', 'desc')->paginate(10);
+
+
+        return view('livewire.message.new-messages', compact('messages'));
     }
 }
