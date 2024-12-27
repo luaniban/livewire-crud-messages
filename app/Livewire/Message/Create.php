@@ -165,12 +165,6 @@ class Create extends Component
 
     public function render()
     {
-
-
-        $pesquisarUsers = User::all();
-
-
-
         return view('livewire.message.create');
     }
 }

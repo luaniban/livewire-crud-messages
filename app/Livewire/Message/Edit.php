@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Livewire\Message;
-use Livewire\Attributes\On;
-use Livewire\Component;
+use App\Models\User;
 use App\Models\Message;
+use Livewire\Component;
 
+use Livewire\Attributes\On;
 use TallStackUi\Traits\Interactions;
 
 class Edit extends Component
@@ -12,12 +13,38 @@ class Edit extends Component
 
     use Interactions;
 
+    public $search = '';
+    public $pesquisarUsers = [];
+    public $searchUser = false;
+
     public $file;
     protected $rules = [
         'file' => 'required|file|max:2048|mimes:jpg,jpeg,png,gif,pdf,doc,docx',
     ];
 
     public  $name, $dataAt, $destinatario, $status, $titulo, $descricao, $password, $user, $user_id;
+
+
+
+    public function closeSearchUser() {
+        $this->searchUser = false;
+    }
+
+
+    public function pesquisarUsuario(){
+
+        $this->searchUser = true;
+
+    }
+
+    public function updatedSearch()
+    {
+        if(strlen($this->search) >= 1) {
+            $this->pesquisarUsers = User::where('name', 'like', '%'.$this->search.'%')->limit(5)->get();
+        }
+
+    }
+
     public function render()
     {
         return view('livewire.message.edit');
@@ -65,11 +92,18 @@ class Edit extends Component
             'destinatario' => $this->destinatario,
             'descricao' => $this->descricao,
             'titulo' => $this->titulo,
+            'name' => $this->name,
             'dataAt' => $this->dataAt,
             'status' => $this->status
 
         ]);
 
+        if($this->destinatario == 'Pesquisar Usuario') {
+            $this->validate([
+                'name' => 'required|not_in:Selecione...',
+            ]);
+            $this->searchUser = false;
+        }
 
         $this->toast()->success('Mensagem atualizada com sucesso!')->send();
 

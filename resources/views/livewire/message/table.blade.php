@@ -11,43 +11,17 @@
 
         <div class="flex items-center ">
 
-     
+
+        <x-ts-select.native wire:model='destinatarioSearch'>
+            <option wire:click="closeSearchUser()">Filtrar...</option>
+            <option wire:click="closeSearchUser()">Todos</option>
+            <option wire:click="closeSearchUser()">Professor</option>
+            <option wire:click="closeSearchUser()">Gestor</option>
+            <option wire:click="closeSearchUser()">Pais de Alunos</option>
+            <option wire:click='pesquisarUsuario()'>Pesquisar Usuario</option>
+        </x-ts-select.native>
 
 
-            <x-ts-select.styled class="w-min-xl" placeholder="Filtrar por Destinatario" wire:model="destinatarioSearch" select="label:label|value:value" :options="[
-                ['label' => 'Todos', 'value' => 'todos'],
-                ['label' => 'Professor', 'value' => 'professor'],
-                ['label' => 'Gestor', 'value' => 'gestor'],
-                ['label' => 'Pais de Alunos', 'value' => 'pais de alunos'],
-                ['label' => 'Pesquisar Usuário', 'value' => 'usuario'],
-
-            ]" />
-            <x-ts-button  icon="adjustments-vertical" wire:click="submit()" color="emerald" class="h-8 ml-4">Filtrar</x-ts-button>
-
-        </div>
-        @if($searchUsuarioTrueOrFalse)
-
-
-            <div class="flex-col items-center p-2 mt-2 ml-4">
-                <div class="flex items-center">
-                    <x-ts-icon name="magnifying-glass" outline class="w-5 h-5 mr-2"/>
-
-                    <input type="search" placeholder="Pesquisar..." aria-label="Search" wire:model.live="search" class="h-10 border-gray-300 rounded shadow-md">
-                </div>
-                @if(sizeof($usersSearch) > 0)
-                    @foreach($usersSearch as $userSearch)
-
-                    <div class="bg-gray-200 w-62 ml-7">
-                        <button  class="w-full text-center bg-gray-100 " wire:model="destinatarioSearch">{{ $userSearch->name }}
-                        </button>
-
-                    </div>
-                    @endforeach
-                @endif
-
-
-            </div>
-        @endif
         <tr>
             <thead class="bg-gray-50">
                 <x-table-th>
@@ -74,6 +48,45 @@
                 </x-table-th>
             </thead>
         </tr>
+
+        @if($searchUser == true)
+        <div class="flex-col items-center mt-2 ml-4">
+            <div class="flex items-center mb-1">
+                <x-ts-icon name="magnifying-glass" outline class="w-5 h-5 mr-2"/>
+
+                <input type="search" placeholder="Pesquisar..." aria-label="Search" wire:model.live="search" class="h-10 border-gray-300 rounded shadow-md">
+            </div>
+        </div>
+            @if(sizeof($pesquisarUsers) > 0)
+                <tbody class="bg-white divide-y divide-gray-200 ">
+                    @foreach($pesquisarUsers as $pesquisarUser)
+
+                        <tr class="hover:bg-gray-50">
+                            <x-table-td>{{ $pesquisarUser->id }}</x-table-td>
+                            <x-table-td>{{ $pesquisarUser->destinatario }}</x-table-td>
+                            <x-table-td>{{ $pesquisarUser->name }}</x-table-td>
+                            <x-table-td>{{ $pesquisarUser->titulo }}</x-table-td>
+                            <x-table-td>{{ $pesquisarUser->status }}</x-table-td>
+                            <x-table-td>{{ $pesquisarUser->dataAt}}</x-table-td>
+                            <x-table-td>
+                                <x-ts-button icon="pencil" color="gray"  outline @click="$dispatch('dispatch-message-table-edit', { id: '{{ $pesquisarUser->id}}' })"></x-ts-button>
+                                <x-ts-button icon="x-mark" color="red" outline @click="$dispatch('dispatch-message-table-delete', { id: '{{ $pesquisarUser->id}}' })"></x-ts-button>
+                            </x-table-td>
+                        </tr>
+
+
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="mt-4">
+                {{ $users->links() }}
+            </div>
+            @endif
+        @endif
+
+
+    @if($searchUser == false)
         <tbody class="bg-white divide-y divide-gray-200">
             @foreach ($users as $user)
             <tr class="hover:bg-gray-50">
@@ -99,7 +112,7 @@
     <div class="mt-4">
         {{ $users->links() }}
     </div>
-
+    @endif
 
 
 </div>

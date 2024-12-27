@@ -20,19 +20,52 @@
                 </div>
             <div class="flex">
                 <div class="w-56 ">
-                    <x-ts-select.styled placeholder="Selecione.." label="Destinatário *" wire:model="destinatario" class=""
+                    <x-ts-select.native label="Destinatario *" wire:model='destinatario'>
+                        <option wire:click="closeSearchUser()" >Selecione...</option>
+                        <option wire:click="closeSearchUser()" >Todos</option>
+                        <option wire:click="closeSearchUser()" >Professor</option>
+                        <option wire:click="closeSearchUser()" >Gestor</option>
+                        <option wire:click="closeSearchUser()" >Pais de alunos</option>
+                        <option wire:click="pesquisarUsuario()">Pesquisar Usuario</option>
+                    </x-ts-select.native>
 
-                    select="label:label|value:value"
-                    :options="[
-                        ['label' => 'Todos', 'value' => 'todos'],
-                        ['label' => 'Professor', 'value' => 'professor'],
-                        ['label' => 'Gestor', 'value' => 'gestor'],
-                        ['label' => 'Pais de Alunos', 'value' => 'pais de alunos'],
-                        ['label' => 'Pesquisar Usuário', 'value' => 'usuario'],
-                    ]"/>
 
-                </div>
+                @if($searchUser)
+                    <div>
 
+                        <div class="flex items-center mt-8">
+                            <x-ts-icon name="magnifying-glass" outline class="w-5 h-5 mr-2"/>
+
+                            <x-ts-input icon="users" type="search" placeholder="Pesquisar..." aria-label="Search" wire:model.live="search" class="border-gray-300 rounded shadow-md "/>
+                        </div>
+
+
+
+                        <x-ts-select.native wire:model.live='name'>
+                            <option value="">Selecione...</option>
+                            @if(sizeof($pesquisarUsers) > 0)
+
+                                @foreach($pesquisarUsers as $pesquisarUser)
+
+                                <div class="bg-gray-200 w-62 ml-7">
+                                    <option  class="text-center bg-gray-100" >{{ $pesquisarUser->name }}
+                                    </option>
+
+                                </div>
+                                @endforeach
+
+                            @endif
+                        </x-ts-select.native>
+
+
+
+
+
+
+
+                    </div>
+                @endif
+           </div>
 
 
 
