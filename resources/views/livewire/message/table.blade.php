@@ -50,11 +50,11 @@
         </tr>
 
         @if($searchUser == true)
-        <div class="flex-col items-center mt-2 ml-4">
+        <div class="flex-col items-center mt-2 mb-5">
             <div class="flex items-center mb-1">
                 <x-ts-icon name="magnifying-glass" outline class="w-5 h-5 mr-2"/>
 
-                <input type="search" placeholder="Pesquisar..." aria-label="Search" wire:model.live="search" class="h-10 border-gray-300 rounded shadow-md">
+                <input type="search" placeholder="Pesquisar..." aria-label="Search" wire:model.live="search" class="border-gray-300 rounded shadow-md ">
             </div>
         </div>
             @if(sizeof($pesquisarUsers) > 0)

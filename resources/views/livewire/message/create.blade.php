@@ -4,9 +4,9 @@
     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20 "
         wire:click.self="closeModalCreate">
 
-        <div class="w-1/2 bg-white rounded-md shadow-md">
+        <div class="bg-white rounded-md shadow-md ">
 
-            <div class="flex-col gap-16 p-8 pl-20">
+            <div class="flex-col gap-16 p-8 pl-20 mr-6">
                  <div class="flex w-full gap-4">
                     <h1 class="mb-6 text-3xl">Criar mensagem</h1>
                     <div class="mt-3">
@@ -97,7 +97,7 @@
             </div>
         </div>
 
-            <div class="flex justify-end gap-4 py-4 bg-gray-200 rounded-b-md">
+            <div class="flex justify-end gap-4 py-4 bg-gray-200 rounded-b-md ">
                 <x-ts-button  color="white" wire:click='closeModalCreate' class="hover:bg-black-50">Cancelar</x-ts-button>
 
                 <x-button  class="mr-8 "

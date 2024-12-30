@@ -21,7 +21,11 @@
                         </x-nav-link>
 
                         <x-nav-link href="{{ route('message.index') }}" wire:navigate :active="request()->routeIs('message.index')">
-                            {{ __('Message') }}
+                            {{ __('Mensagem') }}
+
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('painel.index') }}" wire:navigate :active="request()->routeIs('painel.index')">
+                            {{ __('Painel') }}
 
                         </x-nav-link>
                         @endcan
@@ -88,7 +92,7 @@
                 <!-- Settings Dropdown -->
                 <div class="relative ms-3">
                     <div class="flex">
-                       
+
 
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

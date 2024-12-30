@@ -30,7 +30,7 @@
 
 
                         <tr>
-                            @if($message->destinatario == "professor" || $message->destinatario == "gestor" )
+                            @if($message->destinatario == "Gestor" || $message->destinatario == "professor" )
                                 @can( 'diretor_access')
                                     <x-table-td>{{ $message->id }}</x-table-td>
                                     <x-table-td>{{ $message->destinatario }}</x-table-td>
@@ -83,11 +83,12 @@
                 </tbody>
 
             </table>
-            <livewire:message.vizualizar/>
-
             <div class="mt-4">
                 {{ $messages->links() }}
             </div>
+            <livewire:message.vizualizar/>
+
+
         </div>
 
 

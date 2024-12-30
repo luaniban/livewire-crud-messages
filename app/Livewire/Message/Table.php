@@ -17,11 +17,14 @@ class Table extends Component
     public $destinatarioSearch = null;
     //protected $queryString = ['destinatarioSearch']; // Mantém o valor na URL
     public $searchUser = false;
+    
 
 
     public function pesquisarUsuario(){
 
         $this->searchUser = true;
+
+        $usersQuery = Message::query();
 
     }
 

@@ -9,7 +9,8 @@ class CountNotifications extends Component
 {
     public $user, $destinatario, $countTodos, $countProfessor, $countGestor, $countPaisDeAlunos, $countUsuario, $countADM;
 
-    
+    #[On('dispatch-edit-concluida')]
+    #[On('dispatch-message-table-create-criado')]
     public function mount() {
 
         $this->countTodos = Message::where('destinatario', 'todos')->where('status', 1)->count();
@@ -23,8 +24,7 @@ class CountNotifications extends Component
     }
 
     //#[On('dispatch-message-table-vizualizacao')]
-    #[On('dispatch-edit-concluida')]
-    #[On('dispatch-message-table-create-criado')]
+  
     public function render()
     {
 

@@ -28,6 +28,8 @@ Route::middleware([
 
     Route::get('message', Message\Index::class)->name('message.index')->can('admin_access');
 
+    Route::get('painel', Message\Painel::class)->name('painel.index')->can('admin_access');
+
 
     Route::get('newMessages', Message\NewMessages::class)->name('newMessages.index');
 

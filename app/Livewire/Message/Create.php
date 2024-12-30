@@ -81,6 +81,15 @@ class Create extends Component
     }
 
 
+    public function messages()
+    {
+        return [
+            'dataAt.required' => 'O campo data é obrigatório',
+
+        ];
+    }
+
+
     public function store() {
 
 
@@ -93,6 +102,10 @@ class Create extends Component
             'titulo' => 'required',
 
         ]);
+
+
+
+
 
         // dd($this->name);
         if($this->destinatario == 'Pesquisar Usuario') {

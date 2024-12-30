@@ -12,14 +12,19 @@
                     <h1 class="mb-6 text-3xl">Editar mensagem</h1>
                     <div class="mt-3">
 
+                    @if($status == 1)
+                        <x-ts-toggle label="Inativo/Ativo" wire:model='status' :checked=1 />
+                    @endif
 
-                    <x-ts-toggle label="Inativo/Ativo" wire:model='status' class=""/>
+                    @if($status == 0)
+                    <x-ts-toggle label="Inativo/Ativo" wire:model='status' />
+                    @endif
 
 
                     </div>
                 </div>
             <div class="flex">
-                <div class="w-56 ">
+                <div class="w-96 ">
                     <x-ts-select.native label="Destinatario *" wire:model='destinatario'>
                         <option wire:click="closeSearchUser()" >Selecione...</option>
                         <option wire:click="closeSearchUser()" >Todos</option>
