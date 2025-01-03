@@ -13,7 +13,7 @@
                     Titulo
                 </x-table-th>
                 <x-table-th>
-                    Vizualizar
+                    Quem não vizualizou
                 </x-table-th>
     </div>
    </table>

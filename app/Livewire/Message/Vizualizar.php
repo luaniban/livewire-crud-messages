@@ -31,7 +31,7 @@ class Vizualizar extends Component
         $this->modalVizu = true;
         $user = Message::findOrFail($id);
 
-    
+
         $this->descricao = $user->descricao;
         $this->titulo = $user->titulo;
         $this->file = $user->file;
@@ -50,6 +50,10 @@ class Vizualizar extends Component
         //dd($this->link);
 
     }
+
+
+    
+
 
 
     public function render()

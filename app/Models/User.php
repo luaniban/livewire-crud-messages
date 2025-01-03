@@ -91,9 +91,9 @@ class User extends Authenticatable
         return $this->belongsTo(Cargo::class);
     }
 
-    public function messag00es(): HasMany
+    public function messages()
     {
-        return $this->hasMany(Message::class);
+        return $this->belongsToMany(Message::class)->withPivot('visualizado')->withTimestamps();
     }
 
     public function scopePesquisa($query, $pesquisa)

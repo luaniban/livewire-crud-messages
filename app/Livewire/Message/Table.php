@@ -17,7 +17,7 @@ class Table extends Component
     public $destinatarioSearch = null;
     //protected $queryString = ['destinatarioSearch']; // Mantém o valor na URL
     public $searchUser = false;
-    
+
 
 
     public function pesquisarUsuario(){
@@ -31,6 +31,7 @@ class Table extends Component
     public function closeSearchUser() {
         $this->searchUser = false;
     }
+
 
 
     // Função de submit para filtrar os resultados

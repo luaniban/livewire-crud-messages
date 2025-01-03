@@ -30,6 +30,8 @@ class NewMessages extends Component
     }
 
 
+
+    
     public function render()
     {
 
