@@ -2,7 +2,7 @@
     @if($modalVizu)
 
         <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-20"  wire:click.self="closeModalVizu">
-            <div class="flex-col max-w-5xl max-h-full my-10 bg-white rounded">
+            <div class="flex-col max-w-5xl max-h-full bg-white rounded">
                 <div class="flex justify-center bg-gray-200 h-28 rounded-t-md">
                     <div class="flex-col items-center">
                         <x-ts-icon name="user-circle" class="w-20 h-20 ml-2"/>

@@ -6,6 +6,7 @@ use App\Models\Message;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\File;
 use TallStackUi\Traits\Interactions;
 use Illuminate\Support\Facades\Storage;
@@ -162,7 +163,7 @@ class Create extends Component
 
 
 
-
+        $currentDate = Carbon::now()->toDateTimeString();
 
         $this->closeModalCreate();
         $this->resetInputFields();

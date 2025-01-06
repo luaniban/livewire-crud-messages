@@ -1,7 +1,7 @@
 <div>
 
 
-    <table class="flex-col items-center hidden min-w-full divide-y divide-gray-200 md:table">
+    <table class="flex-col items-center hidden min-w-full border divide-y divide-gray-200 md:table">
 
         <div class="flex items-center gap-4 mb-4">
             <x-ts-button icon="folder-plus" color="emerald" class="mt-5 mb-4" outline @click="$dispatch('dispatch-message-table-create')">
@@ -107,6 +107,8 @@
             @endforeach
 
         </tbody>
+
+    
     </table>
 
     <div class="mt-4">

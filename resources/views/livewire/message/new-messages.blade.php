@@ -26,7 +26,7 @@
 
                         @foreach ($messages as $message)
 
-                        @if($message->dataAt >= $dataAtual)
+
 
 
                         <tr>
@@ -69,7 +69,7 @@
                                         <x-table-td>{{ $message->titulo }}</x-table-td>
 
 
-                                        
+
                                         <x-table-td>
                                             <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
                                         </x-table-td>
@@ -80,7 +80,7 @@
 
 
 
-                        @endif
+
                         @endforeach
 
 
