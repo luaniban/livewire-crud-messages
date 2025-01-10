@@ -139,13 +139,25 @@ class Create extends Component
 
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
-                'name' => $this->name,
                 'file' => $path,
                 'dataAt' => $this->dataAt,
                 'status' => $this->status,
                 'titulo' => $this->titulo,
 
             ]);
+
+            if($this->destinatario == 'Pesquisar Usuario') {
+                Message::create([
+                    'destinatario' => $this->destinatario,
+                    'descricao' => $this->descricao,
+                    'file' => $path,
+                    'dataAt' => $this->dataAt,
+                    'status' => $this->status,
+                    'titulo' => $this->titulo,
+                    'name' => $this->name,
+                ]);
+            }
+
         }
 
         else {
@@ -153,13 +165,27 @@ class Create extends Component
 
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
-                'name' => $this->name,
                 'dataAt' => $this->dataAt,
                 'status' => $this->status,
                 'titulo' => $this->titulo,
 
             ]);
+
+
+            if($this->destinatario == 'Pesquisar Usuario') {
+                Message::create([
+                    'destinatario' => $this->destinatario,
+                    'descricao' => $this->descricao,
+                    'dataAt' => $this->dataAt,
+                    'status' => $this->status,
+                    'titulo' => $this->titulo,
+                    'name' => $this->name,
+                ]);
+            }
+
         }
+
+
 
 
 

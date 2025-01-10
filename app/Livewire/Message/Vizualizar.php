@@ -25,8 +25,9 @@ class Vizualizar extends Component
     #[On('dispatch-message-table-vizualizacao')]
     public function vizualiza($id) {
 
+        $users = Message::find($id)->users();
 
-
+       
 
         $this->modalVizu = true;
         $user = Message::findOrFail($id);
@@ -52,7 +53,7 @@ class Vizualizar extends Component
     }
 
 
-    
+
 
 
 

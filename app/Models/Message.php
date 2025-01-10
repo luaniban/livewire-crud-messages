@@ -16,8 +16,8 @@ class Message extends Model
         'titulo',
     ];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('visualizado')->withTimestamps();
+        return $this->belongsToMany(User::class, 'message_user', 'message_id', 'user_id')->withPivot('visualizado')->withTimestamps();
     }
 }

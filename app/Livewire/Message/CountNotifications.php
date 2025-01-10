@@ -14,18 +14,19 @@ class CountNotifications extends Component
     #[On('dispatch-message-table-create-criado')]
     public function mount() {
 
-        $currentDate = Carbon::now()->toDateTimeString();
+        $currentDate = Carbon::now()->toDateString();
+
         //dd($currentDate);
 
-        //fazer a validação caso a data atual seja menor que a data especificada
 
 
-        $this->countTodos = Message::where('destinatario', 'todos')->where('status', 1)->where('dataAt', '>=', $currentDate)->count();
 
-        $this->countProfessor = Message::where('destinatario', 'professor')->where('status', 1)->where('dataAt', '>=', $currentDate)->count();
-        $this->countGestor = Message::where('destinatario', 'gestor')->where('status', 1)->where('dataAt', '>=', $currentDate)->count();
-        $this->countPaisDeAlunos = Message::where('destinatario', 'pais de alunos')->where('status', 1)->where('dataAt', '>=', $currentDate)->count();
-        $this->countUsuario = Message::where('destinatario', 'usuario')->where('status', 1)->where('dataAt', '>=', $currentDate)->count();
+        $this->countTodos = Message::where('destinatario', 'Todos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
+       //dd($this->countTodos);
+        $this->countProfessor = Message::where('destinatario', 'Professor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
+        $this->countGestor = Message::where('destinatario', 'Gestor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
+        $this->countPaisDeAlunos = Message::where('destinatario', 'Pais de alunos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
+        $this->countUsuario = Message::where('destinatario', 'usuario')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
 
         $this->countADM = $this->countTodos + $this->countProfessor + $this->countGestor + $this->countPaisDeAlunos;
     }

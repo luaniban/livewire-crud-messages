@@ -24,13 +24,13 @@
                     </div>
                 </div>
             <div class="flex">
-                <div class="w-96 ">
+                <div class="w-56">
                     <x-ts-select.native label="Destinatario *" wire:model='destinatario'>
                         <option wire:click="closeSearchUser()" >Selecione...</option>
-                        <option wire:click="closeSearchUser()" >Todos</option>
-                        <option wire:click="closeSearchUser()" >Professor</option>
+                        <option wire:click="closeSearchUser()" value="Todos" >Todos</option>
+                        <option wire:click="closeSearchUser()" value="Professor">Professor</option>
                         <option wire:click="closeSearchUser()" >Gestor</option>
-                        <option wire:click="closeSearchUser()" >Pais de alunos</option>
+                        <option wire:click="closeSearchUser()" value="Pais de alunos" >Pais de Alunos</option>
                         <option wire:click="pesquisarUsuario()">Pesquisar Usuario</option>
                     </x-ts-select.native>
 
@@ -84,13 +84,15 @@
 
                     <div>
 
-                        <x-ts-upload wire:model='file'>
-                            <x-slot:footer>
-                                <x-ts-button class="w-full">
-                                    Save
-                                </x-ts-button>
-                            </x-slot:footer>
-                        </x-ts-upload>
+                        <div>
+
+                            <x-ts-upload wire:model='file' label="Anexar um arquivo">
+                                <x-slot:footer>
+
+                                </x-slot:footer>
+                            </x-ts-upload>
+
+                        </div>
 
                     </div>
 

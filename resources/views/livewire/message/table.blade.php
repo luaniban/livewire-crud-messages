@@ -12,7 +12,7 @@
         <div class="flex items-center ">
 
 
-        <x-ts-select.native wire:model='destinatarioSearch'>
+        <x-ts-select.native wire:model='destinatarioSearch' >
             <option wire:click="closeSearchUser()">Filtrar...</option>
             <option wire:click="closeSearchUser()">Todos</option>
             <option wire:click="closeSearchUser()">Professor</option>
@@ -108,7 +108,7 @@
 
         </tbody>
 
-    
+
     </table>
 
     <div class="mt-4">

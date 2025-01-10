@@ -4,13 +4,13 @@ namespace App\Livewire\Message;
 use App\Models\User;
 use App\Models\Message;
 use Livewire\Component;
-
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 use TallStackUi\Traits\Interactions;
 
 class Edit extends Component
 {
-
+    use WithFileUploads;
     use Interactions;
 
     public $search = '';
@@ -59,20 +59,19 @@ class Edit extends Component
     public function edit($id) {
         $user = Message::find($id);
 
-        if($this->file != null) {
-            $this->file = $user->file;
 
-        }
 
 
             $this->user_id = $user->id;
             $this->destinatario = $user->destinatario;
             $this->descricao = $user->descricao;
             $this->name = $user->name;
+
             $this->dataAt = $user->dataAt;
             $this->status = $user->status;
             $this->titulo = $user->titulo;
 
+           
         $this->modalEdit = true;
 
     }
@@ -88,16 +87,32 @@ class Edit extends Component
 
         $user = Message::find($this->user_id);
 
-        $user->update([
-            'destinatario' => $this->destinatario,
-            'descricao' => $this->descricao,
-            'titulo' => $this->titulo,
-            'name' => $this->name,
-            'dataAt' => $this->dataAt,
-            'status' => $this->status
 
-        ]);
+        if($this->file != null) {
 
+            $path = $this->file->store('uploads', 'public');
+
+            $user->update([
+                'destinatario' => $this->destinatario,
+                'descricao' => $this->descricao,
+                'titulo' => $this->titulo,
+                'name' => $this->name,
+                'file' => $path,
+                'dataAt' => $this->dataAt,
+                'status' => $this->status
+
+            ]);
+        }
+        else {
+            $user->update([
+                'destinatario' => $this->destinatario,
+                'descricao' => $this->descricao,
+                'titulo' => $this->titulo,
+                'name' => $this->name,
+                'dataAt' => $this->dataAt,
+                'status' => $this->status
+            ]);
+        }
         if($this->destinatario == 'Pesquisar Usuario') {
             $this->validate([
                 'name' => 'required|not_in:Selecione...',

@@ -30,7 +30,7 @@
 
 
                         <tr>
-                            @if($message->destinatario == "Gestor" || $message->destinatario == "professor" )
+                            @if($message->destinatario == "Gestor" || $message->destinatario == "professor" || $message->destinatario == "gestor" || $message->destinatario == "Professor" )
                                 @can( 'diretor_access')
                                     <x-table-td>{{ $message->id }}</x-table-td>
                                     <x-table-td>{{ $message->destinatario }}</x-table-td>
@@ -45,7 +45,7 @@
 
                             @endif
 
-                            @if($message->destinatario == "pais de alunos")
+                            @if($message->destinatario == "pais de alunos" || $message->destinatario == "Pais de alunos")
                                 @can('user_access')
                                         <x-table-td>{{ $message->id }}</x-table-td>
                                         <x-table-td>{{ $message->destinatario }}</x-table-td>
@@ -61,7 +61,7 @@
                                     </tr>
                                 @endcan
                             @endif
-                            @if($message->destinatario == "todos")
+                            @if($message->destinatario == "todos" || $message->destinatario == "Todos")
 
                                         <x-table-td>{{ $message->id }}</x-table-td>
                                         <x-table-td>{{ $message->destinatario }}</x-table-td>
