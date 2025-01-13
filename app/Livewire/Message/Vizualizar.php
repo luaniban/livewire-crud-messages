@@ -6,12 +6,16 @@ use App\Models\User;
 use App\Models\Message;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
 class Vizualizar extends Component
 {
-    public $user, $descricao, $titulo, $file, $fileImg, $extension, $info, $link, $destinatario;
+
+
+
+    public $user, $descricao, $titulo, $file, $fileImg, $extension, $info, $link, $destinatario, $name;
     public $modalVizu = false;
     public $teste;
     public function closeModalVizu() {
@@ -24,8 +28,28 @@ class Vizualizar extends Component
 
 
     #[On('dispatch-message-table-vizualizacao')]
-    public function vizualiza($id) {
+    public function vizualiza($user_id, $id) {
 
+        /////////////////////////////
+        $user_vizualizou = User::find($user_id);
+
+        $user_vizualizou->messages()->syncWithoutDetaching([
+            $id => ['visualizado' => 1]
+        ]);
+
+
+
+            //$messageTeste = Message::find($id);
+
+            //$userTeste = User::where('name', $this->name)->first();
+
+            //$messageTeste->users()->syncWithoutDetaching(['user_id' => $userTeste->id]);
+
+
+
+
+
+        //////////////////////////////
         $users = Message::find($id)->users();
 
        $this->teste = User::find(1);

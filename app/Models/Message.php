@@ -18,6 +18,6 @@ class Message extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'message_user', 'message_id', 'user_id')->withPivot('visualizado')->withTimestamps();
+        return $this->belongsToMany(User::class, 'message_user', 'message_id', 'user_id');
     }
 }

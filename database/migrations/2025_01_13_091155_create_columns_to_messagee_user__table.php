@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->boolean('visualizado')->default(false);
             $table->timestamps();
+
+            $table->foreign(('message_id'))->references('id')->on('messages');
+            $table->foreign(('user_id'))->references('id')->on('users');
         });
     }
 

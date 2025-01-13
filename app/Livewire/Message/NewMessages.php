@@ -17,7 +17,7 @@ class NewMessages extends Component
     use WithPagination;
     use Interactions;
 
-
+    public $users;
     public $modalShow = false;
     public $itemsPerPage = 10;
     //public $messages;
@@ -39,8 +39,9 @@ class NewMessages extends Component
         $dataAtual = Carbon::now()->toDateString();
 
         $messages = Message::orderBy('id', 'desc')->where('status', 1)->where('dataAt', '=', $dataAtual)->paginate($this->itemsPerPage);
+        $this->users = User::all();
 
-        //dd($messages);
+        //dd($this->users);
 
 
 

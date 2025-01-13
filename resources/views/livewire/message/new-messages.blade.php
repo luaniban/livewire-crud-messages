@@ -25,9 +25,7 @@
                 <tbody>
 
                         @foreach ($messages as $message)
-
-
-
+                        @foreach ($users as $user)
 
                         <tr>
                             @if($message->destinatario == "Gestor" || $message->destinatario == "professor" || $message->destinatario == "gestor" || $message->destinatario == "Professor" )
@@ -37,7 +35,7 @@
 
                                     <x-table-td>{{ $message->titulo }}</x-table-td>
                                     <x-table-td>
-                                        <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
+                                        <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}', user_id: '{{ $user->id }}'})"></x-ts-button>
                                     </x-table-td>
                                 </tr>
                                 @endcan
@@ -56,7 +54,7 @@
 
 
                                         <x-table-td>
-                                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
+                                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}', user_id: '{{ $user->id }}'})"></x-ts-button>>
                                         </x-table-td>
                                     </tr>
                                 @endcan
@@ -71,7 +69,7 @@
 
 
                                         <x-table-td>
-                                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}' })"></x-ts-button>
+                                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}', user_id: '{{ $user->id }}'})"></x-ts-button>
                                         </x-table-td>
                                     </tr>
 
@@ -81,6 +79,7 @@
 
 
 
+                        @endforeach
                         @endforeach
 
 
