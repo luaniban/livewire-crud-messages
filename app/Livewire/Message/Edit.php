@@ -71,7 +71,7 @@ class Edit extends Component
             $this->status = $user->status;
             $this->titulo = $user->titulo;
 
-           
+
         $this->modalEdit = true;
 
     }
@@ -96,7 +96,7 @@ class Edit extends Component
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
                 'titulo' => $this->titulo,
-                'name' => $this->name,
+
                 'file' => $path,
                 'dataAt' => $this->dataAt,
                 'status' => $this->status
@@ -108,7 +108,7 @@ class Edit extends Component
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
                 'titulo' => $this->titulo,
-                'name' => $this->name,
+
                 'dataAt' => $this->dataAt,
                 'status' => $this->status
             ]);
@@ -117,6 +117,12 @@ class Edit extends Component
             $this->validate([
                 'name' => 'required|not_in:Selecione...',
             ]);
+
+            $user->update([
+                'name' => $this->name,
+
+            ]);
+
             $this->searchUser = false;
         }
 

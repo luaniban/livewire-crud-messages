@@ -6,7 +6,7 @@
                 <div class="flex justify-center bg-gray-200 h-28 rounded-t-md">
                     <div class="flex-col items-center">
                         <x-ts-icon name="user-circle" class="w-20 h-20 ml-2"/>
-                        <p class="">Administrador</p>
+                        <p class="">{{ $teste->name }}</p>
                     </div>
                 </div>
                 <div class="p-8 m-8 bg-gray-200 rounded-md">

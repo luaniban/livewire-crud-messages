@@ -189,8 +189,7 @@ class Create extends Component
 
 
 
-        $currentDate = Carbon::now()->toDateTimeString();
-
+        
         $this->closeModalCreate();
         $this->resetInputFields();
         $this->toast()->success('Mensagem criada com sucesso!')->send();
