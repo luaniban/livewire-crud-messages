@@ -24,67 +24,54 @@
                 </tr>
                 <tbody>
 
-                        @foreach ($messages as $message)
-                        @foreach ($users as $user)
+                    @foreach ($messages as $message)
 
+                        @foreach ($users as $key => $user)
+                        @if($key == 0)
                         <tr>
-                            @if($message->destinatario == "Gestor" || $message->destinatario == "professor" || $message->destinatario == "gestor" || $message->destinatario == "Professor" )
-                                @can( 'diretor_access')
+                                @if(in_array(strtolower($message->destinatario), ['gestor', 'professor']))
+                                    @can('diretor_access')
+                                        <x-table-td>{{ $message->id }}</x-table-td>
+                                        <x-table-td>{{ $message->destinatario }}</x-table-td>
+                                        <x-table-td>{{ $message->titulo }}</x-table-td>
+                                        <x-table-td>
+                                            <x-ts-button icon="eye" color="black" outline
+                                            @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                        </x-ts-button>
+                                        </x-table-td>
+                                    @endcan
+                                    @endif
+
+                                    @if(in_array(strtolower($message->destinatario), ['pais de alunos']))
+                                    @can('user_access')
                                     <x-table-td>{{ $message->id }}</x-table-td>
                                     <x-table-td>{{ $message->destinatario }}</x-table-td>
-
                                     <x-table-td>{{ $message->titulo }}</x-table-td>
                                     <x-table-td>
-                                        <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}', user_id: '{{ $user->id }}'})"></x-ts-button>
+                                            <x-ts-button icon="eye" color="black" outline
+                                            @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                        </x-ts-button>
                                     </x-table-td>
-                                </tr>
-                                @endcan
+                                    @endcan
+                                @endif
 
-
+                                @if(in_array(strtolower($message->destinatario), ['todos']))
+                                    <x-table-td>{{ $message->id }}</x-table-td>
+                                    <x-table-td>{{ $message->destinatario }}</x-table-td>
+                                    <x-table-td>{{ $message->titulo }}</x-table-td>
+                                    <x-table-td>
+                                        <x-ts-button icon="eye" color="black" outline
+                                        @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                    </x-ts-button>
+                                </x-table-td>
+                                @endif
+                            </tr>
                             @endif
-
-                            @if($message->destinatario == "pais de alunos" || $message->destinatario == "Pais de alunos")
-                                @can('user_access')
-                                        <x-table-td>{{ $message->id }}</x-table-td>
-                                        <x-table-td>{{ $message->destinatario }}</x-table-td>
-
-                                        <x-table-td>{{ $message->titulo }}</x-table-td>
-
-
-
-
-                                        <x-table-td>
-                                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}', user_id: '{{ $user->id }}'})"></x-ts-button>>
-                                        </x-table-td>
-                                    </tr>
-                                @endcan
-                            @endif
-                            @if($message->destinatario == "todos" || $message->destinatario == "Todos")
-
-                                        <x-table-td>{{ $message->id }}</x-table-td>
-                                        <x-table-td>{{ $message->destinatario }}</x-table-td>
-
-                                        <x-table-td>{{ $message->titulo }}</x-table-td>
-
-
-
-                                        <x-table-td>
-                                            <x-ts-button icon="eye" color="black" outline @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id}}', user_id: '{{ $user->id }}'})"></x-ts-button>
-                                        </x-table-td>
-                                    </tr>
-
-                            @endif
-
-
-
-
-
                         @endforeach
-                        @endforeach
-
-
-
+                    @endforeach
                 </tbody>
+
+
 
             </table>
             <div class="mt-4">

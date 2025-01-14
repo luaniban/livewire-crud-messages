@@ -3,12 +3,12 @@
         <div class="flex-col p-4 bg-white shadow-xl verflow-hidden dark:bg-gray-800 sm:rounded-lg">
 
 
-
+            
             <livewire:message.table />
             <livewire:message.edit/>
             <livewire:message.delete/>
             <livewire:message.create/>
-            
+
         </div>
     </div>
 </div>

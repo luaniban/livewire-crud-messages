@@ -17,7 +17,7 @@ class Vizualizar extends Component
 
     public $user, $descricao, $titulo, $file, $fileImg, $extension, $info, $link, $destinatario, $name;
     public $modalVizu = false;
-    public $teste;
+    public $admin;
     public function closeModalVizu() {
 
         $this->modalVizu = false;
@@ -52,7 +52,8 @@ class Vizualizar extends Component
         //////////////////////////////
         $users = Message::find($id)->users();
 
-       $this->teste = User::find(1);
+       $this->admin= User::find($user_id);
+
 
 
         $this->modalVizu = true;
@@ -85,6 +86,6 @@ class Vizualizar extends Component
 
     public function render()
     {
-        return view('livewire.message.vizualizar', ['teste' =>$this->teste, 'descricao' => $this->descricao, 'titulo' => $this->titulo, 'file' => $this->file, 'extension' => $this->extension, 'link' => $this->link]);
+        return view('livewire.message.vizualizar', ['admin' =>$this->admin, 'descricao' => $this->descricao, 'titulo' => $this->titulo, 'file' => $this->file, 'extension' => $this->extension, 'link' => $this->link]);
     }
 }
