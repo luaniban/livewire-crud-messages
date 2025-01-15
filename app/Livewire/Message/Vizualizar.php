@@ -4,6 +4,7 @@ namespace App\Livewire\Message;
 use App\Models\User;
 //use Illuminate\Container\Attributes\Storage;
 use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Http\Request;
@@ -31,9 +32,10 @@ class Vizualizar extends Component
     public function vizualiza($user_id, $id) {
 
         /////////////////////////////
-        $user_vizualizou = User::find($user_id);
+        $userVizualizou = Auth::user();
 
-        $user_vizualizou->messages()->syncWithoutDetaching([
+
+        $userVizualizou->messages()->syncWithoutDetaching([
             $id => ['visualizado' => 1]
         ]);
 

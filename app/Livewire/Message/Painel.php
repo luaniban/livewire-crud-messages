@@ -21,6 +21,11 @@ class Painel extends Component
 
 
 
+
+
+
+   
+
     public function pesquisarUsuario(){
 
         $this->searchUser = true;

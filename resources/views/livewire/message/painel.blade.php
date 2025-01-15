@@ -66,6 +66,7 @@
             <div class="mt-4">
                 {{ $users->links() }}
             </div>
+
             @endif
         @endif
 
@@ -78,7 +79,7 @@
                 <x-table-td>{{ $user->destinatario }}</x-table-td>
                 <x-table-td>{{ $user->name }}</x-table-td>
                 <x-table-td>{{ $user->titulo }}</x-table-td>
-                <x-table-td> <x-ts-button class="ml-12" icon="clipboard-document-list" color="blue" outline></x-ts-button></x-table-td>
+                <x-table-td> <x-ts-button class="ml-12" icon="clipboard-document-list" color="blue" outline @click="$dispatch('dispatch-list-painel', { id: '{{ $user->id}}' })"></x-ts-button></x-table-td>
 
             </tr>
 
@@ -92,6 +93,7 @@
     <div class="mt-4">
         {{ $users->links() }}
     </div>
+    <livewire:message.painel-visualizacao/>
     @endif
 
     </div>
