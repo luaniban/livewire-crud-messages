@@ -40,11 +40,14 @@ class NewMessages extends Component
         $messages = Message::orderBy('id', 'desc')->where('status', 1)->where('dataAt', '=', $dataAtual)->paginate($this->itemsPerPage);
         $users = User::all();
 
+        $namePesquisarUser  = Auth::user();
+        $namePesquisarUser = $namePesquisarUser->name;
+        //dd($teste);
+        $pesquisarUsers = Message::orderBy('id', 'desc')->where('name', $namePesquisarUser)->where('status', 1)->where('dataAt', '=', $dataAtual)->paginate($this->itemsPerPage);
 
 
 
 
-
-        return view('livewire.message.new-messages', compact('messages', 'users'));
+        return view('livewire.message.new-messages', compact('messages', 'users', 'pesquisarUsers'));
     }
 }

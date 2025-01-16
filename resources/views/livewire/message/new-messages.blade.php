@@ -65,6 +65,21 @@
                                     </x-ts-button>
                                 </x-table-td>
                                 @endif
+
+                                @foreach ($pesquisarUsers as $pesquisarUser)
+
+                                @if($message->name == $pesquisarUser->name)
+
+                                    <x-table-td>{{ $pesquisarUser->id }}</x-table-td>
+                                    <x-table-td>{{ $pesquisarUser->destinatario }}</x-table-td>
+                                    <x-table-td>{{ $pesquisarUser->titulo }}</x-table-td>
+                                    <x-table-td>
+                                        <x-ts-button icon="eye" color="black" outline
+                                        @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                    </x-ts-button>
+                                </x-table-td>
+                                @endif
+                                @endforeach
                             </tr>
                             @endif
                         @endforeach

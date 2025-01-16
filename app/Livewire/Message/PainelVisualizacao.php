@@ -14,7 +14,7 @@ class PainelVisualizacao extends Component
     public $openModalUsersVisualizacao = false;
     public $openModalUsersNaoVisualizacao = false;
     public $usersVisualizaram;
-    public $userName = [];
+    public $usersName = [];
 
 
     public function openModalPainelVisualizacao(){
@@ -45,12 +45,22 @@ class PainelVisualizacao extends Component
 
     }
 
+
+
+    
+
     #[On('dispatch-list-painel')]
     public function teste($id) {
         $this->openModalPainel = true;
 
-        $this->usersVisualizaram = DB::table('message_user')->where('message_id', $id)->get();
-      
+        $this->usersName = DB::table('message_user')
+        ->join('users', 'message_user.user_id', '=', 'users.id')
+        ->where('message_user.message_id', $id)
+        ->pluck('users.name')
+        ->toArray();
+      //  dd($this->usersName);
+
+
 
     }
 

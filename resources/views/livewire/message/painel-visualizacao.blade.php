@@ -10,9 +10,9 @@
                     @if($openModalUsersVisualizacao)
                         <div class="w-full py-4 bg-white h-5/6">
 
-                            @foreach ($usersVisualizaram as $userVisualizaram)
+                            @foreach ($usersName as $userName)
                             <li class="ml-6">
-                              <ul>{{ $userVisualizaram->user_id }}</ul>
+                              <ul>{{ $userName }}</ul>
                             </li>
                             @endforeach
                         </div>
