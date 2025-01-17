@@ -14,8 +14,10 @@ class PainelVisualizacao extends Component
     public $openModalUsersVisualizacao = false;
     public $openModalUsersNaoVisualizacao = false;
     public $usersVisualizaram;
-    public $usersName = [];
-
+    public $userTabelaMessageUser = [];
+    public $userTabelaUser;
+    public $value = 0;
+    public $verificaUserPesquisarUser;
 
     public function openModalPainelVisualizacao(){
         $this->openModalPainel = true;
@@ -24,6 +26,7 @@ class PainelVisualizacao extends Component
 
         $this->openModalPainel = false;
         $this->openModalUsersVisualizacao = false;
+        $this->openModalUsersNaoVisualizacao = false;
     }
 
     #[On('dispatch-open-modal-user-visualizaram')]
@@ -36,6 +39,8 @@ class PainelVisualizacao extends Component
         $this->openModalUsersVisualizacao = false;
 
     }
+
+    #[On('dispatch-open-modal-user-nao-visualizaram')]
     public function openModalUsersNaoVisualizacao(){
         $this->openModalUsersNaoVisualizacao = true;
 
@@ -47,19 +52,27 @@ class PainelVisualizacao extends Component
 
 
 
-    
+
 
     #[On('dispatch-list-painel')]
     public function teste($id) {
         $this->openModalPainel = true;
 
-        $this->usersName = DB::table('message_user')
+        $this->userTabelaMessageUser = DB::table('message_user')
         ->join('users', 'message_user.user_id', '=', 'users.id')
         ->where('message_user.message_id', $id)
         ->pluck('users.name')
         ->toArray();
-      //  dd($this->usersName);
 
+
+
+
+      $this->userTabelaUser = User::all();
+    $this->verificaUserPesquisarUser = Message::find($id);
+
+    $this->verificaUserPesquisarUser = $this->verificaUserPesquisarUser->destinatario;
+
+  
 
 
     }
@@ -68,6 +81,9 @@ class PainelVisualizacao extends Component
 
     public function render()
     {
+
+
+
         return view('livewire.message.painel-visualizacao');
     }
 }

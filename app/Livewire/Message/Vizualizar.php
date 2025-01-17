@@ -79,6 +79,8 @@ class Vizualizar extends Component
         }
         //dd($this->link);
 
+        $this->dispatch('dispatch-count', $id);
+
     }
 
 
