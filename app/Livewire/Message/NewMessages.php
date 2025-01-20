@@ -33,11 +33,11 @@ class NewMessages extends Component
     }
 
 
-    #[On('dispatch-message-table-vizualizacao')]//ele ta dando preferencia a esse dispatch ao inves do outro que faz as relações
+    #[On('dispatch-message-table-vizualizacao')]
     public function olhinho($id) {
 
         $userVizualizou = Auth::user();
-
+        
 
         $userVizualizou->messages()->syncWithoutDetaching([
             $id => ['visualizado' => 1]

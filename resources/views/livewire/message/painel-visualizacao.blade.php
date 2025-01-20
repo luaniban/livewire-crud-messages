@@ -12,7 +12,7 @@
 
                             @foreach ($userTabelaMessageUser as $userName)
                             <li class="ml-6">
-                              <ul>{{ $userName }}</ul>
+                              <ul>{{ $userName->name }}</ul>
                             </li>
                             @endforeach
                         </div>
@@ -25,7 +25,15 @@
                 @if($verificaUserPesquisarUser != 'Pesquisar Usuario')
                 @if($openModalUsersNaoVisualizacao)
                     <div class="w-full py-4 bg-white h-5/6">
-                        @for($i = 0; $i < sizeof($userTabelaUser); $i++)
+
+
+                        @foreach ($userTabelaMessageUser as $userName)
+                            <li class="ml-6">
+                              <ul>{{ $userName->name }}</ul>
+                            </li>
+                        @endforeach
+
+                        {{-- @for($i = 0; $i < sizeof($userTabelaUser); $i++)
                             @for($t = 0; $t < sizeof($userTabelaMessageUser); $t++)
 
                                 @if($userTabelaUser[$i]->name == $userTabelaMessageUser[$t])
@@ -44,7 +52,7 @@
                             @php
                                 $value = 0;
                             @endphp
-                        @endfor
+                        @endfor --}}
                     </div>
                 @endif
                 @endif

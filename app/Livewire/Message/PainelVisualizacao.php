@@ -61,8 +61,7 @@ class PainelVisualizacao extends Component
         $this->userTabelaMessageUser = DB::table('message_user')
         ->join('users', 'message_user.user_id', '=', 'users.id')
         ->where('message_user.message_id', $id)
-        ->pluck('users.name')
-        ->toArray();
+        ->get();
 
       //  dd($this->userTabelaMessageUser);
 

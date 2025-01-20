@@ -3,10 +3,13 @@
 namespace App\Livewire\Message;
 use App\Models\User;
 use App\Models\Message;
+
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use TallStackUi\Traits\Interactions;
 use Illuminate\Support\Facades\Storage;
@@ -135,7 +138,7 @@ class Create extends Component
         if($this->file != null) {
             $path = $this->file->store('uploads', 'public');
 
-            Message::create([
+           $message =  Message::create([
 
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
@@ -147,7 +150,7 @@ class Create extends Component
             ]);
 
             if($this->destinatario == 'Pesquisar Usuario') {
-                Message::create([
+             $message =  Message::create([
                     'destinatario' => $this->destinatario,
                     'descricao' => $this->descricao,
                     'file' => $path,
@@ -161,7 +164,7 @@ class Create extends Component
         }
 
         else {
-            Message::create([
+            $message =Message::create([
 
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
@@ -173,7 +176,7 @@ class Create extends Component
 
 
             if($this->destinatario == 'Pesquisar Usuario') {
-                Message::create([
+            $message =  Message::create([
                     'destinatario' => $this->destinatario,
                     'descricao' => $this->descricao,
                     'dataAt' => $this->dataAt,
@@ -187,15 +190,35 @@ class Create extends Component
 
 
 
+        if($this->destinatario == 'todos' || $this->destinatario == 'Todos') {
+        $userIds = User::pluck('id')->toArray();
+
+        $message->users()->attach($userIds, ['visualizado' => 0]);
+        }
 
 
-        
+        if($this->destinatario == 'Gestor' || $this->destinatario == 'Professor') {
+            $userIds = User::where('Cargo_id', 2)->pluck('id')->toArray();
+
+            $message->users()->attach($userIds, ['visualizado' => 0]);
+        }
+
+        if($this->destinatario == 'Pais de alunos' || $this->destinatario == 'Professor') {
+            $userIds = User::where('Cargo_id', 3)->pluck('id')->toArray();
+
+            $message->users()->attach($userIds, ['visualizado' => 0]);
+        }
+
+
+
+
+
         $this->closeModalCreate();
         $this->resetInputFields();
         $this->toast()->success('Mensagem criada com sucesso!')->send();
 
 
-        $this->dispatch('dispatch-message-table-create-criado')->to(Table::class);
+        $this->dispatch('dispatch-message-table-create-criado');
 
     }
 
@@ -204,6 +227,9 @@ class Create extends Component
 
     public function render()
     {
+
+
+
         return view('livewire.message.create');
     }
 }

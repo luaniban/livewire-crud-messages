@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CountNotifications extends Component
 {
@@ -15,12 +16,12 @@ class CountNotifications extends Component
     #[On('dispatch-message-table-create-criado')]
     #[On('dispatch-count')]
     public function mount() {
-       
+
         $currentDate = Carbon::now()->toDateString();
 
         //dd($currentDate);
 
-
+        $user = Auth::user();
 
 
         $this->countTodos = Message::where('destinatario', 'Todos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
@@ -28,9 +29,10 @@ class CountNotifications extends Component
         $this->countProfessor = Message::where('destinatario', 'Professor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
         $this->countGestor = Message::where('destinatario', 'Gestor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
         $this->countPaisDeAlunos = Message::where('destinatario', 'Pais de alunos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
-        $this->countUsuario = Message::where('destinatario', 'usuario')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
+        $this->countUsuario = Message::where('destinatario', 'Pesquisar Usuario')->where('status', 1)->where('dataAt', '=', $currentDate)->where('name', $user->name)->count();
 
-        $this->countADM = $this->countTodos + $this->countProfessor + $this->countGestor + $this->countPaisDeAlunos;
+
+        $this->countADM = $this->countTodos + $this->countProfessor + $this->countGestor + $this->countPaisDeAlunos + $this->countUsuario;
     }
 
     //#[On('dispatch-message-table-vizualizacao')]

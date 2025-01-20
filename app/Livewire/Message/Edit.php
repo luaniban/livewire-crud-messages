@@ -128,7 +128,7 @@ class Edit extends Component
 
         $this->toast()->success('Mensagem atualizada com sucesso!')->send();
 
-        $this->dispatch('dispatch-edit-concluida')->to(Table::class);
+        $this->dispatch('dispatch-edit-concluida');
 
         $this->modalEdit = false;
     }
