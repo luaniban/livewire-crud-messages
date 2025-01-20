@@ -15,7 +15,7 @@ class CountNotifications extends Component
     #[On('dispatch-message-table-create-criado')]
     #[On('dispatch-count')]
     public function mount() {
-
+       
         $currentDate = Carbon::now()->toDateString();
 
         //dd($currentDate);
@@ -29,7 +29,7 @@ class CountNotifications extends Component
         $this->countGestor = Message::where('destinatario', 'Gestor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
         $this->countPaisDeAlunos = Message::where('destinatario', 'Pais de alunos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
         $this->countUsuario = Message::where('destinatario', 'usuario')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
-        
+
         $this->countADM = $this->countTodos + $this->countProfessor + $this->countGestor + $this->countPaisDeAlunos;
     }
 

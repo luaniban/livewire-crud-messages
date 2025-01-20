@@ -64,7 +64,7 @@ class PainelVisualizacao extends Component
         ->pluck('users.name')
         ->toArray();
 
-
+      //  dd($this->userTabelaMessageUser);
 
 
       $this->userTabelaUser = User::all();
@@ -72,7 +72,7 @@ class PainelVisualizacao extends Component
 
     $this->verificaUserPesquisarUser = $this->verificaUserPesquisarUser->destinatario;
 
-  
+
 
 
     }

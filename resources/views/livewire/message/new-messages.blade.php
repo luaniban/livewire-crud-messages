@@ -35,9 +35,34 @@
                                         <x-table-td>{{ $message->destinatario }}</x-table-td>
                                         <x-table-td>{{ $message->titulo }}</x-table-td>
                                         <x-table-td>
-                                            <x-ts-button icon="eye" color="black" outline
-                                            @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
-                                        </x-ts-button>
+
+                                            @if($this->dbMessageId == null)
+                                                <x-ts-button icon="eye" color="black" outline
+                                                @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                </x-ts-button>
+
+                                            @endif
+
+                                            @if($this->dbMessageId)
+                                                @if($this->dbMessageId[0]->visualizado && $this->dbMessageId[0]->message_id == $message->id)
+                                                    <x-ts-button icon="eye-slash" color="black" outline
+                                                    @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                    </x-ts-button>
+                                                @endif
+                                                @if($this->dbMessageId[0]->message_id != $message->id)
+                                                    <x-ts-button icon="eye" color="black" outline
+                                                    @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                    </x-ts-button>
+                                                @endif
+
+                                            @endif
+
+
+
+
+
+
+
                                         </x-table-td>
                                     @endcan
                                     @endif
@@ -48,9 +73,29 @@
                                     <x-table-td>{{ $message->destinatario }}</x-table-td>
                                     <x-table-td>{{ $message->titulo }}</x-table-td>
                                     <x-table-td>
+
+                                        @if($this->dbMessageId == null)
+                                        <x-ts-button icon="eye" color="black" outline
+                                        @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                        </x-ts-button>
+
+                                        @endif
+
+                                        @if($this->dbMessageId)
+                                            @if($this->dbMessageId[0]->visualizado && $this->dbMessageId[0]->message_id == $message->id)
+                                                <x-ts-button icon="eye-slash" color="black" outline
+                                                @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                </x-ts-button>
+                                            @endif
+                                            @if($this->dbMessageId[0]->message_id != $message->id)
                                             <x-ts-button icon="eye" color="black" outline
                                             @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
-                                        </x-ts-button>
+                                            </x-ts-button>
+
+                                            @endif
+                                        @endif
+
+
                                     </x-table-td>
                                     @endcan
                                 @endif
@@ -60,9 +105,27 @@
                                     <x-table-td>{{ $message->destinatario }}</x-table-td>
                                     <x-table-td>{{ $message->titulo }}</x-table-td>
                                     <x-table-td>
-                                        <x-ts-button icon="eye" color="black" outline
-                                        @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
-                                    </x-ts-button>
+                                      @if($this->dbMessageId == null)
+                                                <x-ts-button icon="eye" color="black" outline
+                                                @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                </x-ts-button>
+
+                                            @endif
+
+                                            @if($this->dbMessageId)
+                                                @if($this->dbMessageId[0]->visualizado && $this->dbMessageId[0]->message_id == $message->id)
+                                                    <x-ts-button icon="eye-slash" color="black" outline
+                                                    @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                    </x-ts-button>
+                                                @endif
+                                                @if($this->dbMessageId[0]->message_id != $message->id)
+                                                <x-ts-button icon="eye" color="black" outline
+                                                @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                </x-ts-button>
+
+                                                @endif
+                                            @endif
+
                                 </x-table-td>
                                 @endif
 
@@ -74,9 +137,27 @@
                                     <x-table-td>{{ $pesquisarUser->destinatario }}</x-table-td>
                                     <x-table-td>{{ $pesquisarUser->titulo }}</x-table-td>
                                     <x-table-td>
-                                        <x-ts-button icon="eye" color="black" outline
-                                        @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
-                                    </x-ts-button>
+                                      @if($this->dbMessageId == null)
+                                                <x-ts-button icon="eye" color="black" outline
+                                                @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                </x-ts-button>
+
+                                            @endif
+
+                                            @if($this->dbMessageId)
+                                                @if($this->dbMessageId[0]->visualizado && $this->dbMessageId[0]->message_id == $message->id)
+                                                    <x-ts-button icon="eye-slash" color="black" outline
+                                                    @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                    </x-ts-button>
+                                                @endif
+                                                @if($this->dbMessageId[0]->message_id != $message->id)
+                                                <x-ts-button icon="eye" color="black" outline
+                                                @click="$dispatch('dispatch-message-table-vizualizacao', { id: '{{ $message->id }}', user_id: '{{ $user->id }}' })">
+                                                </x-ts-button>
+
+                                                @endif
+                                            @endif
+
                                 </x-table-td>
                                 @endif
                                 @endforeach

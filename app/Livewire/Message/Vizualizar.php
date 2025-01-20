@@ -32,13 +32,7 @@ class Vizualizar extends Component
     public function vizualiza($user_id, $id) {
 
         /////////////////////////////
-        $userVizualizou = Auth::user();
-
-
-        $userVizualizou->messages()->syncWithoutDetaching([
-            $id => ['visualizado' => 1]
-        ]);
-
+        
 
 
             //$messageTeste = Message::find($id);
@@ -79,7 +73,7 @@ class Vizualizar extends Component
         }
         //dd($this->link);
 
-        $this->dispatch('dispatch-count', $id);
+
 
     }
 
