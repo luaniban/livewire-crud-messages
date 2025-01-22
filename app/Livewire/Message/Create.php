@@ -188,30 +188,26 @@ class Create extends Component
 
         }
 
+        if($this->destinatario == 'Pesquisar Usuario') {
 
+            $userIds = User::where('name', $this->name)->pluck('id')->toArray();
+        }
 
         if($this->destinatario == 'todos' || $this->destinatario == 'Todos') {
-        $userIds = User::pluck('id')->toArray();
-
-        $message->users()->attach($userIds, ['visualizado' => 0]);
+            $userIds = User::pluck('id')->toArray();
         }
 
 
         if($this->destinatario == 'Gestor' || $this->destinatario == 'Professor') {
             $userIds = User::where('Cargo_id', 2)->pluck('id')->toArray();
-
-            $message->users()->attach($userIds, ['visualizado' => 0]);
         }
 
-        if($this->destinatario == 'Pais de alunos' || $this->destinatario == 'Professor') {
+        if($this->destinatario == 'Pais de alunos') {
             $userIds = User::where('Cargo_id', 3)->pluck('id')->toArray();
-
-            $message->users()->attach($userIds, ['visualizado' => 0]);
         }
 
 
-
-
+        $message->users()->attach($userIds, ['visualizado' => 0]);
 
         $this->closeModalCreate();
         $this->resetInputFields();

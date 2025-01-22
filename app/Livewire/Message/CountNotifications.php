@@ -7,6 +7,7 @@ use Livewire\Attributes\On;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Can;
 
 class CountNotifications extends Component
 {
@@ -21,7 +22,11 @@ class CountNotifications extends Component
 
         //dd($currentDate);
 
-        $user = Auth::user();
+        $user = Message::where('status', 1)->where('dataAt', '=', $currentDate)->where('name', null)->get();
+        dd($user);
+
+
+       // db::table('message_user')->where()
 
 
         $this->countTodos = Message::where('destinatario', 'Todos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
@@ -31,7 +36,7 @@ class CountNotifications extends Component
         $this->countPaisDeAlunos = Message::where('destinatario', 'Pais de alunos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
         $this->countUsuario = Message::where('destinatario', 'Pesquisar Usuario')->where('status', 1)->where('dataAt', '=', $currentDate)->where('name', $user->name)->count();
 
-
+       // $teste  = db::table('message_user')->where('user_id', $user->id)->where('visualizado', 0);
         $this->countADM = $this->countTodos + $this->countProfessor + $this->countGestor + $this->countPaisDeAlunos + $this->countUsuario;
     }
 

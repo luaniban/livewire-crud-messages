@@ -70,7 +70,7 @@ class Table extends Component
     // Função render para exibir a tabela de dados
     public function render(){
 
-       
+
         // Chama a função submit para carregar os dados filtrados ou não
         return $this->submit();
     }
