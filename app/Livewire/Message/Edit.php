@@ -3,9 +3,11 @@
 namespace App\Livewire\Message;
 use App\Models\User;
 use App\Models\Message;
+
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\DB;
 use TallStackUi\Traits\Interactions;
 
 class Edit extends Component
@@ -22,7 +24,7 @@ class Edit extends Component
         'file' => 'required|file|max:2048|mimes:jpg,jpeg,png,gif,pdf,doc,docx',
     ];
 
-    public  $name, $dataAt, $destinatario, $status, $titulo, $descricao, $password, $user, $user_id;
+    public  $name, $dataAt, $destinatario, $status, $titulo, $descricao, $password,  $message_id;
 
 
 
@@ -57,19 +59,19 @@ class Edit extends Component
     }
     #[On('dispatch-message-table-edit')]
     public function edit($id) {
-        $user = Message::find($id);
+        $message = Message::find($id);
 
 
 
 
-            $this->user_id = $user->id;
-            $this->destinatario = $user->destinatario;
-            $this->descricao = $user->descricao;
-            $this->name = $user->name;
+            $this->message_id = $message->id;
+            $this->destinatario = $message->destinatario;
+            $this->descricao = $message->descricao;
+            $this->name = $message->name;
 
-            $this->dataAt = $user->dataAt;
-            $this->status = $user->status;
-            $this->titulo = $user->titulo;
+            $this->dataAt = $message->dataAt;
+            $this->status = $message->status;
+            $this->titulo = $message->titulo;
 
 
         $this->modalEdit = true;
@@ -85,14 +87,14 @@ class Edit extends Component
             'titulo' => 'required',
         ]);
 
-        $user = Message::find($this->user_id);
+        $message = Message::find($this->message_id);
 
 
         if($this->file != null) {
 
             $path = $this->file->store('uploads', 'public');
 
-            $user->update([
+            $message->update([
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
                 'titulo' => $this->titulo,
@@ -104,7 +106,7 @@ class Edit extends Component
             ]);
         }
         else {
-            $user->update([
+            $message->update([
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
                 'titulo' => $this->titulo,
@@ -118,13 +120,44 @@ class Edit extends Component
                 'name' => 'required|not_in:Selecione...',
             ]);
 
-            $user->update([
+            $message->update([
                 'name' => $this->name,
 
             ]);
 
             $this->searchUser = false;
         }
+
+
+
+
+
+
+        if($this->destinatario == 'Pesquisar Usuario') {
+
+            $userIds = User::where('name', $this->name)->pluck('id')->toArray();
+        }
+
+        if($this->destinatario == 'todos' || $this->destinatario == 'Todos') {
+            $userIds = User::pluck('id')->toArray();
+        }
+
+
+        if($this->destinatario == 'Gestor' || $this->destinatario == 'Professor') {
+            $userIds = User::where('Cargo_id', 2)->pluck('id')->toArray();
+        }
+
+        if($this->destinatario == 'Pais de alunos') {
+            $userIds = User::where('Cargo_id', 3)->pluck('id')->toArray();
+        }
+
+
+
+        DB::table('message_user')->where('message_id', $message->id)->delete();
+        
+        $message->users()->attach($userIds, ['visualizado' => 0]);
+
+
 
         $this->toast()->success('Mensagem atualizada com sucesso!')->send();
 

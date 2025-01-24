@@ -35,6 +35,7 @@ class CountNotifications extends Component
                 $this->countTodos = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
             }
             if(($message->destinatario == 'Professor' || $message->destinatario == 'Gestor') && ($user->cargo_id == 2 || $user->cargo_id == 1) && $message->dataAt == $currentDate && $message->status == 1) {
+                //dump($message->destinatario);
                 $this->countProfessorOrGestor = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
             }
             if(($message->destinatario == 'Pais de alunos' || $message->destinatario == 'Pais de Alunos') && $user->cargo_id == 3 && $message->dataAt == $currentDate && $message->status == 1)  {

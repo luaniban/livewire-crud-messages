@@ -2,17 +2,18 @@
 
 namespace App\Livewire\Message;
 
-use Illuminate\Support\Facades\App;
-use Livewire\Attributes\On;
-use Livewire\Component;
 use App\Models\Message;
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 use TallStackUi\Traits\Interactions;
 
 class Delete extends Component
 {
     use Interactions;
 
-    public $user_id, $user;
+    public $message_id, $message;
     public $modalDelete = false;
 
 
@@ -20,8 +21,8 @@ class Delete extends Component
     #[On('dispatch-message-table-delete')]
     public function openModalDelete($id) {
 
-        $user = Message::find($id);
-        $this->user_id = $user->id;
+        $message = Message::find($id);
+        $this->message_id = $message->id;
 
         $this->modalDelete = true;
     }
@@ -32,7 +33,8 @@ class Delete extends Component
 
     public function delete() {
 
-        Message::find($this->user_id)->delete();
+        DB::table('message_user')->where('message_id', $this->message_id)->delete();
+        Message::find($this->message_id)->delete();
 
         $this->dispatch('dispatch-delete-concluida')->to(Table::class);
         $this->closeModalDelete();

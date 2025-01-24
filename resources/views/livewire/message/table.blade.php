@@ -21,6 +21,7 @@
             <option wire:click='pesquisarUsuario()'>Pesquisar Usuario</option>
         </x-ts-select.native>
 
+    
 
         <tr>
             <thead class="bg-gray-50">
