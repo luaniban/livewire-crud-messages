@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Message;
+use App\Models\User;
 use App\Models\Message;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -11,36 +12,54 @@ use Illuminate\Validation\Rules\Can;
 
 class CountNotifications extends Component
 {
-    public $destinatario, $countTodos, $countProfessor, $countGestor, $countPaisDeAlunos, $countUsuario, $countADM;
-
+    public $countTodos = 0;
+    public $countProfessorOrGestor = 0;
+    public $countPaisDeAlunos = 0;
+    public $countPesquisarUser = 0;
+    public $countAll = 0;
+    public $professor = 0;
     #[On('dispatch-edit-concluida')]
     #[On('dispatch-message-table-create-criado')]
     #[On('dispatch-count')]
     public function mount() {
 
         $currentDate = Carbon::now()->toDateString();
-
-        //dd($currentDate);
-
-        $user = Message::where('status', 1)->where('dataAt', '=', $currentDate)->where('name', null)->get();
-        dd($user);
+        $user = Auth::user();
 
 
-       // db::table('message_user')->where()
+        $messages = Message::all();
+
+        foreach ($messages as $message) {
+           if($message->destinatario == 'Todos' && $message->dataAt == $currentDate && $message->status == 1){
+
+                $this->countTodos = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
+            }
+            if(($message->destinatario == 'Professor' || $message->destinatario == 'Gestor') && ($user->cargo_id == 2 || $user->cargo_id == 1) && $message->dataAt == $currentDate && $message->status == 1) {
+                $this->countProfessorOrGestor = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
+            }
+            if(($message->destinatario == 'Pais de alunos' || $message->destinatario == 'Pais de Alunos') && $user->cargo_id == 3 && $message->dataAt == $currentDate && $message->status == 1)  {
+                $this->countPaisDeAlunos = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
+            }
+            if($message->name == $user->name && $message->dataAt == $currentDate && $message->status == 1){
+                $this->countPesquisarUser = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
+            }
+        }
+
+       // dump($this->countTodos, $this->countProfessorOrGestor, $this->countPaisDeAlunos, $this->countPesquisarUser);
+
+        $this->countAll = $this->countTodos + $this->countProfessorOrGestor + $this->countPaisDeAlunos + $this->countPesquisarUser;
 
 
-        $this->countTodos = Message::where('destinatario', 'Todos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
-       //dd($this->countTodos);
-        $this->countProfessor = Message::where('destinatario', 'Professor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
-        $this->countGestor = Message::where('destinatario', 'Gestor')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
-        $this->countPaisDeAlunos = Message::where('destinatario', 'Pais de alunos')->where('status', 1)->where('dataAt', '=', $currentDate)->count();
-        $this->countUsuario = Message::where('destinatario', 'Pesquisar Usuario')->where('status', 1)->where('dataAt', '=', $currentDate)->where('name', $user->name)->count();
+       // $this->CountNotifications = countTodos +
 
-       // $teste  = db::table('message_user')->where('user_id', $user->id)->where('visualizado', 0);
-        $this->countADM = $this->countTodos + $this->countProfessor + $this->countGestor + $this->countPaisDeAlunos + $this->countUsuario;
-    }
 
-    //#[On('dispatch-message-table-vizualizacao')]
+
+
+
+
+
+        }
+
 
     public function render()
     {

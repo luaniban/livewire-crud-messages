@@ -9,12 +9,12 @@
 
                     @if($openModalUsersVisualizacao)
                         <div class="w-full py-4 bg-white h-5/6">
-
-                            @foreach ($userTabelaMessageUser as $userName)
-                            <li class="ml-6">
-                              <ul>{{ $userName->name }}</ul>
-                            </li>
+                            @foreach ($userTabelaMessageUser as $userQueVisualizou)
+                                @if($userQueVisualizou->visualizado == 1)
+                                    <p class="text-center">{{ $userQueVisualizou->name }}</p>
+                                @endif
                             @endforeach
+
                         </div>
                     @endif
 
@@ -27,11 +27,14 @@
                     <div class="w-full py-4 bg-white h-5/6">
 
 
-                        @foreach ($userTabelaMessageUser as $userName)
-                            <li class="ml-6">
-                              <ul>{{ $userName->name }}</ul>
-                            </li>
+                        @foreach ($userTabelaMessageUser as $userQueVisualizou)
+                                @if($userQueVisualizou->visualizado == 0)
+                                <p class="text-center">{{ $userQueVisualizou->name }}</p>
+                                @endif
                         @endforeach
+
+
+
 
                         {{-- @for($i = 0; $i < sizeof($userTabelaUser); $i++)
                             @for($t = 0; $t < sizeof($userTabelaMessageUser); $t++)

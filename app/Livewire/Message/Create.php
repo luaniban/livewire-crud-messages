@@ -164,7 +164,7 @@ class Create extends Component
         }
 
         else {
-            $message =Message::create([
+            $message = Message::create([
 
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
