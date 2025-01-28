@@ -18,6 +18,7 @@ class CountNotifications extends Component
     public $countPesquisarUser = 0;
     public $countAll = 0;
     public $professor = 0;
+    //public $teste = 0;
     #[On('dispatch-edit-concluida')]
     #[On('dispatch-message-table-create-criado')]
     #[On('dispatch-count')]
@@ -34,26 +35,30 @@ class CountNotifications extends Component
 
                 $this->countTodos = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
             }
-            if(($message->destinatario == 'Professor' || $message->destinatario == 'Gestor') && ($user->cargo_id == 2 || $user->cargo_id == 1) && $message->dataAt == $currentDate && $message->status == 1) {
-                //dump($message->destinatario);
-                $this->countProfessorOrGestor = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
+            if(($message->destinatario == 'Professor' || $message->destinatario == 'Gestor') && ($user->cargo_id == 2 ) && $message->dataAt == $currentDate && $message->status == 1) {
+
+
+                $this->countProfessorOrGestor = DB::table('message_user')->where('visualizado', 0)->where('user_id', $user->id )->count();
+
+                //$this->teste = $this->teste + $this->countProfessorOrGestor;
+                //dump($this->teste);
+
             }
             if(($message->destinatario == 'Pais de alunos' || $message->destinatario == 'Pais de Alunos') && $user->cargo_id == 3 && $message->dataAt == $currentDate && $message->status == 1)  {
                 $this->countPaisDeAlunos = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
+                $this->countPaisDeAlunos += $this->countPaisDeAlunos;
             }
             if($message->name == $user->name && $message->dataAt == $currentDate && $message->status == 1){
                 $this->countPesquisarUser = DB::table('message_user')->where('message_id', '=', $message->id)->where('visualizado', 0)->where('user_id', $user->id)->count();
             }
         }
 
-       // dump($this->countTodos, $this->countProfessorOrGestor, $this->countPaisDeAlunos, $this->countPesquisarUser);
+       //dump($this->countTodos, $this->countProfessorOrGestor, $this->countPaisDeAlunos, $this->countPesquisarUser);
 
         $this->countAll = $this->countTodos + $this->countProfessorOrGestor + $this->countPaisDeAlunos + $this->countPesquisarUser;
 
 
        // $this->CountNotifications = countTodos +
-
-
 
 
 

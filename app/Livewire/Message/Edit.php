@@ -80,7 +80,7 @@ class Edit extends Component
 
 
     public function update() {
-        $this->validate([ //Para o admin colocar os dados corretamente, caso esteja errado, irá aparecer uma mensagem dizendo que o campo de dados está errado e está sendo requerido novamente.
+        $this->validate([
             'destinatario' => 'required',
             'descricao' => 'required|string|max:1000',
             'dataAt' => 'required',
@@ -98,7 +98,6 @@ class Edit extends Component
                 'destinatario' => $this->destinatario,
                 'descricao' => $this->descricao,
                 'titulo' => $this->titulo,
-
                 'file' => $path,
                 'dataAt' => $this->dataAt,
                 'status' => $this->status
@@ -154,7 +153,7 @@ class Edit extends Component
 
 
         DB::table('message_user')->where('message_id', $message->id)->delete();
-        
+
         $message->users()->attach($userIds, ['visualizado' => 0]);
 
 
