@@ -7,6 +7,7 @@
                 <div class="h-full px-8 pt-4 bg-gray-300 rounded-sm">
                     <x-ts-button color=blue lg @click="$dispatch('dispatch-open-modal-user-visualizaram')">Usuários que visualizaram</x-ts-button>
 
+                @if($verificaUserPesquisarUser->destinatario != 'Pesquisar Usuario')
                     @if($openModalUsersVisualizacao)
                         <div class="w-full py-4 bg-white h-5/6">
                             @foreach ($usersVisualizaram as $vizu)
@@ -19,12 +20,25 @@
                             @endforeach
                         </div>
                     @endif
+                    @endif
 
+                    @if($verificaUserPesquisarUser->destinatario == 'Pesquisar Usuario')
+                        @if($openModalUsersVisualizacao)
+                            <div class="w-full py-4 bg-white h-5/6">
+                                <div>
+                                    @if($this->verificaUserPesquisarUserVisu[0]->visualizado == 1)
+                                    <p class="text-center">{{ $verificaUserPesquisarUserVisuName }}</p>
+                                    @endif
+
+                                </div>
+                            </div>
+                        @endif
+                    @endif
                 </div>
 
                 <div class="h-full px-8 pt-4 bg-gray-300 rounded-sm">
                     <x-ts-button color=red lg @click="$dispatch('dispatch-open-modal-user-nao-visualizaram')">Usuários que não visualizaram</x-ts-button>
-                @if($verificaUserPesquisarUser != 'Pesquisar Usuario')
+                @if($verificaUserPesquisarUser->destinatario != 'Pesquisar Usuario')
 
 
                     @if($openModalUsersNaoVisualizacao)
@@ -40,14 +54,13 @@
                             </div>
                     @endif
                 @endif
-                @if($verificaUserPesquisarUser == 'Pesquisar Usuario')
+
+                @if($verificaUserPesquisarUser->destinatario == 'Pesquisar Usuario')
                     @if($openModalUsersNaoVisualizacao)
                     <div class="w-full py-4 bg-white h-5/6">
-
-
-                        <div class="ml-6">
-                        <p>Usuario Visualizou sua mensagem!</p>
-                        </div>
+                        @if($this->verificaUserPesquisarUserVisu[0]->visualizado == 0)
+                            <p class="text-center">{{ $verificaUserPesquisarUserVisuName }}</p>
+                        @endif
 
                     </div>
                     @endif

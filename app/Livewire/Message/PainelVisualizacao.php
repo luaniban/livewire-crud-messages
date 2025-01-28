@@ -19,7 +19,10 @@ class PainelVisualizacao extends Component
     public $value = 0;
     public $verificaUserPesquisarUser;
     public $usersQueNaoVisualizaram;
-
+    public $verificaUserPesquisarUserVisu;
+    public $verificaUserPesquisarUserVisuName;
+   // public $pesquisarUserVizu;
+   // public $pesquisarUserNaoVizu;
     public function openModalPainelVisualizacao(){
         $this->openModalPainel = true;
     }
@@ -68,12 +71,18 @@ class PainelVisualizacao extends Component
 
         $this->usersVisualizaram = DB::table('message_user')->where('message_id', $id)->where('visualizado', 1)->get();
         $this->usersQueNaoVisualizaram = DB::table('message_user')->where('message_id', $id)->where('visualizado', 0)->get();
-
+        //$this->pesquisarUserVizu = Message::find($id);
+        //dump($this->pesquisarUserVizu->name);
         $this->userTabelaUser = User::all();
         $this->verificaUserPesquisarUser = Message::find($id);
+        if($this->verificaUserPesquisarUser->name != null){
 
-        $this->verificaUserPesquisarUser = $this->verificaUserPesquisarUser->destinatario;
+            $this->verificaUserPesquisarUserVisu = DB::table('message_user')->where('message_id', $id)->get();
 
+                $this->verificaUserPesquisarUserVisuName  = User::find($this->verificaUserPesquisarUserVisu[0]->user_id);
+                $this->verificaUserPesquisarUserVisuName  = $this->verificaUserPesquisarUserVisuName->name;
+
+        }
 
 
 
