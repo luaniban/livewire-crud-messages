@@ -9,12 +9,14 @@
 
                     @if($openModalUsersVisualizacao)
                         <div class="w-full py-4 bg-white h-5/6">
-                            @foreach ($userTabelaMessageUser as $userQueVisualizou)
-                                @if($userQueVisualizou->visualizado == 1)
-                                    <p class="text-center">{{ $userQueVisualizou->name }}</p>
-                                @endif
-                            @endforeach
+                            @foreach ($usersVisualizaram as $vizu)
+                                @foreach ( $userTabelaUser as $user)
 
+                                    @if($vizu->user_id == $user->id)
+                                    <p class="text-center">{{ $user->name }}</p>
+                                    @endif
+                                @endforeach
+                            @endforeach
                         </div>
                     @endif
 
@@ -23,41 +25,20 @@
                 <div class="h-full px-8 pt-4 bg-gray-300 rounded-sm">
                     <x-ts-button color=red lg @click="$dispatch('dispatch-open-modal-user-nao-visualizaram')">Usuários que não visualizaram</x-ts-button>
                 @if($verificaUserPesquisarUser != 'Pesquisar Usuario')
-                @if($openModalUsersNaoVisualizacao)
-                    <div class="w-full py-4 bg-white h-5/6">
 
 
-                        @foreach ($userTabelaMessageUser as $userQueVisualizou)
-                                @if($userQueVisualizou->visualizado == 0)
-                                <p class="text-center">{{ $userQueVisualizou->name }}</p>
-                                @endif
-                        @endforeach
+                    @if($openModalUsersNaoVisualizacao)
+                            <div class="w-full py-4 bg-white h-5/6">
+                                @foreach ($usersQueNaoVisualizaram as $vizu)
+                                    @foreach ( $userTabelaUser as $user)
 
-
-
-
-                        {{-- @for($i = 0; $i < sizeof($userTabelaUser); $i++)
-                            @for($t = 0; $t < sizeof($userTabelaMessageUser); $t++)
-
-                                @if($userTabelaUser[$i]->name == $userTabelaMessageUser[$t])
-                                    @php
-                                        $value = 1;
-                                    @endphp
-                                @endif
-                            @endfor
-
-                            @if($value == 0)
-
-                                    <li class="ml-6">
-                                        <ul>{{ $userTabelaUser[$i]->name }}</ul>
-                                    </li>
-                            @endif
-                            @php
-                                $value = 0;
-                            @endphp
-                        @endfor --}}
-                    </div>
-                @endif
+                                        @if($vizu->user_id == $user->id)
+                                        <p class="text-center">{{ $user->name }}</p>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                    @endif
                 @endif
                 @if($verificaUserPesquisarUser == 'Pesquisar Usuario')
                     @if($openModalUsersNaoVisualizacao)

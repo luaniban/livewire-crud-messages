@@ -18,6 +18,7 @@ class PainelVisualizacao extends Component
     public $userTabelaUser;
     public $value = 0;
     public $verificaUserPesquisarUser;
+    public $usersQueNaoVisualizaram;
 
     public function openModalPainelVisualizacao(){
         $this->openModalPainel = true;
@@ -64,13 +65,14 @@ class PainelVisualizacao extends Component
         ->get();
         //dd($this->userTabelaMessageUser);
 
-      //  dd($this->userTabelaMessageUser);
 
+        $this->usersVisualizaram = DB::table('message_user')->where('message_id', $id)->where('visualizado', 1)->get();
+        $this->usersQueNaoVisualizaram = DB::table('message_user')->where('message_id', $id)->where('visualizado', 0)->get();
 
-      $this->userTabelaUser = User::all();
-    $this->verificaUserPesquisarUser = Message::find($id);
+        $this->userTabelaUser = User::all();
+        $this->verificaUserPesquisarUser = Message::find($id);
 
-    $this->verificaUserPesquisarUser = $this->verificaUserPesquisarUser->destinatario;
+        $this->verificaUserPesquisarUser = $this->verificaUserPesquisarUser->destinatario;
 
 
 
